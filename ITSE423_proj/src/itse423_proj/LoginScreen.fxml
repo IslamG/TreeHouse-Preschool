@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.LoginScreenController">
+   <children>
+      <VBox alignment="CENTER" layoutX="119.0" layoutY="-1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="440.0" prefWidth="314.0" spacing="30.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@1v4p44J6_400x400.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" text="Tree House Pre-School" />
+               </children>
+            </HBox>
+            <TextField promptText="Enter user name" />
+            <PasswordField promptText="Enter your password" />
+            <Button mnemonicParsing="false" onAction="#login" text="LOGIN" />
+            <Label fx:id="errorMsg" text="Error in credentials check username or password" textFill="RED" />
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
