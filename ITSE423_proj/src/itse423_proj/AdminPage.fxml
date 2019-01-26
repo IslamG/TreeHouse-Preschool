@@ -4,6 +4,7 @@
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -54,22 +55,22 @@
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="39.0" prefWidth="253.0" spacing="20.0">
                                        <children>
-                                          <Button mnemonicParsing="false" text="Edit Teacher" />
-                                          <Button mnemonicParsing="false" text="Remove Teacher" />
+                                          <Button fx:id="editTeacher" mnemonicParsing="false" onAction="#manageTeacher" text="Edit Teacher" />
+                                          <Button fx:id="removeTeacher" mnemonicParsing="false" onAction="#manageTeacher" text="Remove Teacher" />
                                        </children>
                                     </HBox>
                                  </children>
                               </AnchorPane>
                            </content>
                         </TitledPane>
-                        <TitledPane animated="false" prefHeight="290.0" prefWidth="160.0" text="Manage Employees">
+                        <TitledPane animated="false" onContextMenuRequested="#manageEmployee" prefHeight="290.0" prefWidth="160.0" text="Manage Employees">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="39.0" prefWidth="253.0" spacing="40.0">
                                        <children>
-                                          <Button mnemonicParsing="false" text="Add User" />
-                                          <Button mnemonicParsing="false" text="Delete User" />
+                                          <Button fx:id="addU" mnemonicParsing="false" onAction="#manageEmployee" text="Add User" />
+                                          <Button fx:id="removeU" mnemonicParsing="false" onAction="#manageEmployee" text="Delete User" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -83,7 +84,14 @@
                                     <HBox prefHeight="42.0" prefWidth="253.0">
                                        <children>
                                           <TextField prefHeight="25.0" prefWidth="126.0" />
-                                          <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                          <ComboBox fx:id="studentChoice" onAction="#searchBy" prefHeight="25.0" prefWidth="97.0" promptText="Select search method">
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="Search by Name" />
+                                                    <String fx:value="Search by ID" />
+                                                </FXCollections>
+                                            </items>
+                                        </ComboBox>
                                        </children>
                                     </HBox>
                                  </children>
@@ -97,7 +105,14 @@
                                     <HBox layoutX="-1.0" layoutY="-2.0" prefHeight="42.0" prefWidth="253.0">
                                        <children>
                                           <TextField prefHeight="25.0" prefWidth="126.0" />
-                                          <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                          <ComboBox fx:id="subjectChoice" onAction="#searchBy" prefHeight="25.0" prefWidth="97.0" promptText="Select search method">
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="Teacher" />
+                                                    <String fx:value="Subject Code" />
+                                                </FXCollections>
+                                            </items>
+                                        </ComboBox>
                                        </children>
                                     </HBox>
                                  </children>
@@ -110,10 +125,14 @@
             </VBox>
          </right>
          <center>
-            <Pane prefHeight="255.0" prefWidth="353.0" style="-fx-background-color: rgb(240,100,240);" BorderPane.alignment="CENTER">
+            <Pane fx:id="content" prefHeight="255.0" prefWidth="353.0" style="-fx-background-color: rgb(240,100,240);" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="67.0" layoutY="41.0" text="Welcome" />
-                  <Label layoutX="67.0" layoutY="74.0" text="What would you like to do?" />
+                  <AnchorPane id="content" prefHeight="341.0" prefWidth="350.0">
+                     <children>
+                        <Label layoutX="25.0" layoutY="105.0" prefHeight="27.0" prefWidth="54.0" text="Welcome" />
+                        <Label layoutX="25.0" layoutY="162.0" text="What would you like to do?" />
+                     </children>
+                  </AnchorPane>
                </children>
             </Pane>
          </center>

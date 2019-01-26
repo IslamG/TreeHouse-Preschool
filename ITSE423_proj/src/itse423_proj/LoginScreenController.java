@@ -31,8 +31,7 @@ import javafx.stage.Stage;
 public class LoginScreenController implements Initializable {
     
     
-    @FXML
-    private Button login;
+   
 
     @FXML
     private void login(ActionEvent event) {
@@ -45,9 +44,15 @@ public class LoginScreenController implements Initializable {
             Image image = new Image(this.getClass().getResourceAsStream("pencil.png"));  //pass in the image path
             scene.setCursor(new ImageCursor(image));
             
+
             Stage stage=new Stage();
             stage.setScene(scene);
             stage.show();
+            //Stage stage2 = (Stage) login.getScene().getWindow();
+            //stage2.close();
+            Node source = (Node) event.getSource();
+            Stage stage2 = (Stage) source.getScene().getWindow();
+            stage2.close();
             
         } catch (IOException ex) {
             Logger.getLogger(LoginScreenController.class.getName()).log(Level.SEVERE, null, ex);
