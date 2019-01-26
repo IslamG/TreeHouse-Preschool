@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="517.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="82.0" fitWidth="79.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@proj/src/proj/generic-user.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="54.0" layoutY="124.0" text="First Name:" />
+      <Label layoutX="54.0" layoutY="164.0" text="Last Name:" />
+      <Label layoutX="54.0" layoutY="200.0" text="Gender:" />
+      <Label layoutX="54.0" layoutY="230.0" text="Class:" />
+      <Label layoutX="181.0" layoutY="124.0" text="Ahmed" />
+      <Label layoutX="179.0" layoutY="164.0" text="Masoud" />
+      <Label layoutX="176.0" layoutY="200.0" text="M" />
+      <Label layoutX="171.0" layoutY="230.0" text="2-B" />
+   </children>
+</AnchorPane>
