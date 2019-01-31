@@ -19,9 +19,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class AdminPageController {
 
@@ -32,11 +37,12 @@ public class AdminPageController {
     private Pane content;
     @FXML
     private TabPane staffTab;
-    
     @FXML
-    private Button addU;
+    private BorderPane borderPane;
     @FXML
-    private Button removeU;
+    private Button addUser;
+    @FXML
+    private Button removeUser;
     @FXML
     private Button editTeacher;
     @FXML
@@ -47,28 +53,49 @@ public class AdminPageController {
     private ComboBox<String> studentChoice;
     @FXML
     private TabPane teacherTab;
+   
     @FXML
     private void manageEmployee(ActionEvent event)
     {
         try 
         {
             Pane newLoadedPane;
-
+            
             Button tempButton = (Button)event.getSource();
             switch(tempButton.getId())
             {
 
-                case "addU":
+                case "addUser":
                     newLoadedPane =  FXMLLoader.load(getClass().getResource("StaffInfo.fxml"));
                     content.getChildren().clear();
+                    //content.setPrefSize(newLoadedPane.getPrefWidth(), newLoadedPane.getPrefHeight());
+                    System.out.println(content.getHeight()+" "+content.getWidth());
                     content.getChildren().add(newLoadedPane);
+                    //Node source = (Node) event.getSource();
+                    AnchorPane.setBottomAnchor(newLoadedPane, 0.0);
+                    AnchorPane.setTopAnchor(newLoadedPane, 0.0);
+                    AnchorPane.setLeftAnchor(newLoadedPane, 0.0);
+                    AnchorPane.setRightAnchor(newLoadedPane, 0.0);
+                    //System.out.println(newLoadedPane.getPrefWidth()+" "+ newLoadedPane.getPrefHeight());
+                    borderPane.prefHeightProperty().bind(borderPane.getScene().heightProperty());
+                    borderPane.prefWidthProperty().bind(borderPane.getScene().widthProperty());
+                    Stage stage = (Stage) content.getScene().getWindow();
+                    stage.sizeToScene();
+                    //AnchorPane.setRightAnchor((Node) content.getChildren().get(0), content.getWidth());
                     break;
-                case "removeU":
+                case "removeUser":
                     newLoadedPane =  FXMLLoader.load(getClass().getResource("StaffInfo.fxml"));
                     content.getChildren().clear();
                     content.getChildren().add(newLoadedPane);
                     staffTab=(TabPane)newLoadedPane.getChildren().get(0);
                     staffTab.getSelectionModel().selectLast();
+                    content.setPrefSize(600, 600);
+                    //AnchorPane.setBottomAnchor(newLoadedPane, 0.0);
+                    //AnchorPane.setTopAnchor(newLoadedPane, 0.0);
+                    //AnchorPane.setLeftAnchor(newLoadedPane, 0.0);
+                    //AnchorPane.setRightAnchor(newLoadedPane, content.getWidth());
+                    stage = (Stage) content.getScene().getWindow();
+                    stage.sizeToScene();
                     break;
             }
         }
@@ -81,7 +108,7 @@ public class AdminPageController {
     {
         try 
         {
-            Pane newLoadedPane;
+            AnchorPane newLoadedPane;
 
             Button tempButton = (Button)event.getSource();
             switch(tempButton.getId())
@@ -125,20 +152,30 @@ public class AdminPageController {
                 newLoadedPane =  FXMLLoader.load(getClass().getResource("StudentInfo.fxml"));
                 content.getChildren().clear();
                 content.getChildren().add(newLoadedPane);
+                content.setPrefSize(newLoadedPane.getWidth(), newLoadedPane.getHeight());
                 break;
             case "subjectChoice":
                 subjectChoice.getValue();
                 System.out.println("Search by "+subjectChoice.getValue());
-                newLoadedPane =  FXMLLoader.load(getClass().getResource("SubjectEdit.fxml"));
+                newLoadedPane =  FXMLLoader.load(getClass().getResource("MarkSearch.fxml"));
                 content.getChildren().clear();
                 content.getChildren().add(newLoadedPane);
+                System.out.println(newLoadedPane);
+                content.setPrefSize(newLoadedPane.getWidth(), newLoadedPane.getHeight());
                 break;
         }
     }
 
     @FXML
     void initialize() {
-        
+        //Image image = new Image(input); 
+   
+        // create a image View 
+        //ImageView imageview = new ImageView(image); 
+   
+        // create Label 
+         //Label label = new Label("", imageview); 
+            
         //ObservableList<String> availableChoices = FXCollections.observableArrayList("Search by Name", "Search by ID"); 
         //studentChoice.setItems(availableChoices);
         //System.out.println(studentChoice);

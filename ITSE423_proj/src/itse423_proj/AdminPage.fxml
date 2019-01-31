@@ -8,14 +8,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.AdminPageController">
+<AnchorPane id="AnchorPane" prefHeight="501.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.AdminPageController">
    <children>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+      <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="700.0">
          <top>
-            <Pane fx:id="header" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: purple;" BorderPane.alignment="CENTER">
+            <Pane fx:id="header" prefHeight="60.0" prefWidth="629.0" style="-fx-background-color: purple;" BorderPane.alignment="CENTER">
                <children>
                   <Button layoutX="21.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: rgb(100,255,100);" text="O" />
-                  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="543.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="626.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Misc_Skull.png" />
                      </image></ImageView>
@@ -24,21 +24,21 @@
             </Pane>
          </top>
          <right>
-            <VBox prefHeight="349.0" prefWidth="252.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="349.0" BorderPane.alignment="CENTER">
                <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
+                  <Pane prefHeight="200.0">
                      <children>
-                        <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="91.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="81.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Misc_Skull.png" />
                            </image>
                            </ImageView>
-                        <Label layoutX="112.0" layoutY="137.0" text="Admin" />
+                        <Label layoutX="109.0" layoutY="142.0" text="Admin" />
                      </children>
                   </Pane>
                   <Accordion prefHeight="188.0" prefWidth="252.0">
                      <panes>
-                        <TitledPane animated="false" prefHeight="290.0" prefWidth="115.0" text="Manage Personal">
+                        <TitledPane animated="false" prefHeight="290.0" text="Manage Personal">
                            <content>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
@@ -63,21 +63,21 @@
                               </AnchorPane>
                            </content>
                         </TitledPane>
-                        <TitledPane animated="false" onContextMenuRequested="#manageEmployee" prefHeight="290.0" prefWidth="160.0" text="Manage Employees">
+                        <TitledPane animated="false" onContextMenuRequested="#manageEmployee" prefHeight="290.0" text="Manage Employees">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="39.0" prefWidth="253.0" spacing="40.0">
                                        <children>
-                                          <Button fx:id="addU" mnemonicParsing="false" onAction="#manageEmployee" text="Add User" />
-                                          <Button fx:id="removeU" mnemonicParsing="false" onAction="#manageEmployee" text="Delete User" />
+                                          <Button fx:id="addUser" mnemonicParsing="false" onAction="#manageEmployee" text="Add User" />
+                                          <Button fx:id="removeUser" mnemonicParsing="false" onAction="#manageEmployee" text="Delete User" />
                                        </children>
                                     </HBox>
                                  </children>
                               </AnchorPane>
                            </content>
                         </TitledPane>
-                        <TitledPane animated="false" layoutX="10.0" layoutY="60.0" prefHeight="290.0" prefWidth="160.0" text="Manage Students">
+                        <TitledPane animated="false" layoutX="10.0" layoutY="60.0" prefHeight="290.0" text="Manage Students">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -98,7 +98,7 @@
                               </AnchorPane>
                            </content>
                         </TitledPane>
-                        <TitledPane animated="false" layoutX="10.0" layoutY="85.0" prefHeight="290.0" prefWidth="160.0" text="Manage Subjects">
+                        <TitledPane animated="false" layoutX="10.0" layoutY="85.0" prefHeight="290.0" text="Manage Subjects">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -125,16 +125,20 @@
             </VBox>
          </right>
          <center>
-            <Pane fx:id="content" prefHeight="255.0" prefWidth="353.0" style="-fx-background-color: rgb(240,100,240);" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="443.0" prefWidth="450.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane id="content" prefHeight="341.0" prefWidth="350.0">
+                  <Pane fx:id="content" layoutX="1.0" layoutY="2.0" prefHeight="443.0" prefWidth="449.0" style="-fx-background-color: rgb(240,100,240);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label layoutX="25.0" layoutY="105.0" prefHeight="27.0" prefWidth="54.0" text="Welcome" />
-                        <Label layoutX="25.0" layoutY="162.0" text="What would you like to do?" />
+                        <AnchorPane id="content">
+                           <children>
+                              <Label layoutX="25.0" layoutY="105.0" prefHeight="27.0" prefWidth="54.0" text="Welcome" />
+                              <Label layoutX="25.0" layoutY="162.0" text="What would you like to do?" />
+                           </children>
+                        </AnchorPane>
                      </children>
-                  </AnchorPane>
+                  </Pane>
                </children>
-            </Pane>
+            </AnchorPane>
          </center>
       </BorderPane>
    </children>
