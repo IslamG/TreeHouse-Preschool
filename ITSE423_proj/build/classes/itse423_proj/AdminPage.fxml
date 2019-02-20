@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="501.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.AdminPageController">
    <children>
-      <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="700.0">
+      <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
          <top>
             <Pane fx:id="header" prefHeight="60.0" prefWidth="629.0" style="-fx-background-color: purple;" BorderPane.alignment="CENTER">
                <children>
@@ -125,9 +125,9 @@
             </VBox>
          </right>
          <center>
-            <AnchorPane prefHeight="443.0" prefWidth="450.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="content" BorderPane.alignment="CENTER">
                <children>
-                  <Pane fx:id="content" layoutX="1.0" layoutY="2.0" prefHeight="443.0" prefWidth="449.0" style="-fx-background-color: rgb(240,100,240);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Pane layoutX="1.0" layoutY="2.0" prefHeight="443.0" prefWidth="449.0" style="-fx-background-color: rgb(240,100,240);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane id="content">
                            <children>
