@@ -5,21 +5,27 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="517.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="517.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.StudentInfoController">
    <children>
-      <ImageView fitHeight="82.0" fitWidth="79.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@proj/src/proj/generic-user.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="54.0" layoutY="124.0" text="First Name:" />
-      <Label layoutX="54.0" layoutY="164.0" text="Last Name:" />
-      <Label layoutX="54.0" layoutY="200.0" text="Gender:" />
-      <Label layoutX="54.0" layoutY="230.0" text="Class:" />
-      <Label layoutX="181.0" layoutY="124.0" text="Ahmed" />
-      <Label layoutX="179.0" layoutY="164.0" text="Masoud" />
-      <Label layoutX="176.0" layoutY="200.0" text="M" />
-      <Label layoutX="171.0" layoutY="230.0" text="2-B" />
+      <ImageView fx:id="idImage" fitHeight="82.0" fitWidth="79.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="24.0" layoutY="116.0" text="First Name:" />
+      <Label layoutX="24.0" layoutY="141.0" text="Last Name:" />
+      <Label layoutX="24.0" layoutY="164.0" text="Gender:" />
+      <Label layoutX="315.0" layoutY="116.0" text="Class:" />
+      <Label fx:id="fnameField" layoutX="122.0" layoutY="117.0" prefHeight="17.0" prefWidth="59.0" />
+      <Label fx:id="lnameField" layoutX="100.0" layoutY="144.0" prefHeight="11.0" prefWidth="79.0" />
+      <Label fx:id="genderField" layoutX="105.0" layoutY="164.0" prefHeight="17.0" prefWidth="70.0" />
+      <Label fx:id="classField" layoutX="382.0" layoutY="117.0" />
+      <Label layoutX="24.0" layoutY="212.0" text="Address:" />
+      <Label layoutX="24.0" layoutY="247.0" text="BirthPlace" />
+      <Label layoutX="24.0" layoutY="282.0" text="Birthday:" />
+      <Label layoutX="24.0" layoutY="321.0" text="Enroll date:" />
+      <Label layoutX="24.0" layoutY="359.0" text="Father phone:" />
+      <Label fx:id="addressField" layoutX="161.0" layoutY="212.0" />
+      <Label fx:id="birthplaceField" layoutX="147.0" layoutY="247.0" />
+      <Label fx:id="birthdayField" layoutX="161.0" layoutY="282.0" />
+      <Label fx:id="addDateField" layoutX="126.0" layoutY="321.0" />
+      <Label fx:id="fatherNumField" layoutX="122.0" layoutY="359.0" />
+      <Button fx:id="saveButton" layoutX="396.0" layoutY="43.0" mnemonicParsing="false" onAction="#saveInfo" text="Save Info" />
    </children>
 </AnchorPane>

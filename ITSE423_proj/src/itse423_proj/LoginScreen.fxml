@@ -8,9 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="613.0" prefWidth="557.0" style="-fx-background-color: rgb(76, 47, 0)" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.LoginScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#mouseActive" onMouseReleased="#mouseInactive" prefHeight="613.0" prefWidth="557.0" style="-fx-background-color: rgb(76, 47, 0)" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.LoginScreenController">
    <children>
-      <Pane fx:id="root" prefHeight="613.0" prefWidth="557.0" />
+      <Pane fx:id="content" prefHeight="613.0" prefWidth="557.0" />
       <Pane layoutX="49.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="623.0" fitWidth="446.0" pickOnBounds="true" preserveRatio="true">
@@ -21,10 +21,16 @@
             <VBox fx:id="frame" alignment="CENTER" layoutX="62.0" layoutY="173.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="378.0" prefWidth="328.0" spacing="30.0" style="-fx-background-color: rgba(255, 255, 100,0.5);-fx-border-radius: 5%;-fx-background-radius:5%;" StackPane.alignment="CENTER">
                <children>
                   <Label alignment="CENTER" text="Tree House Pre-School" />
-                  <TextField fx:id="userNameField" promptText="Enter user name" />
-                  <PasswordField fx:id="passwordField" promptText="Enter your password" />
+                  <TextField fx:id="userNameField" onKeyPressed="#removeMsg" promptText="Enter user name" />
+                  <StackPane>
+                     <children>
+                        <TextField fx:id="passwordText" />
+                        <PasswordField fx:id="passwordField" onKeyPressed="#removeMsg" promptText="Enter your password" />
+                        <CheckBox fx:id="eye" alignment="CENTER_RIGHT" mnemonicParsing="false" stylesheets="@eyeStyle.css" StackPane.alignment="CENTER_RIGHT" />
+                     </children>
+                  </StackPane>
                   <Button mnemonicParsing="false" onAction="#login" text="LOGIN" />
-                  <Label fx:id="errorMsg" text="Error in credentials check username or password" textFill="RED" />
+                  <Label fx:id="errorMsg" textFill="RED" />
                </children>
                <padding>
                   <Insets left="20.0" right="20.0" />

@@ -8,13 +8,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="501.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.AdminPageController">
+<AnchorPane id="AnchorPane" onMousePressed="#mouseActive" onMouseReleased="#mouseInactive" prefHeight="501.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.AdminPageController">
    <children>
       <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
          <top>
             <Pane fx:id="header" prefHeight="60.0" prefWidth="629.0" style="-fx-background-color: purple;" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="21.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: rgb(100,255,100);" text="O" />
+                  <Button layoutX="21.0" layoutY="18.0" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: rgb(100,255,100);" text="O" />
                   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="626.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Misc_Skull.png" />
@@ -42,9 +42,8 @@
                            <content>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Update Profile" />
-                                    <Button mnemonicParsing="false" text="Update Info" />
-                                    <Button mnemonicParsing="false" text="Change Password" />
+                                    <Button fx:id="updateInfo" mnemonicParsing="false" onAction="#manageSelf" text="Update Profile" />
+                                    <Button fx:id="changePassword" mnemonicParsing="false" onAction="#manageSelf" text="Change Password" />
                                  </children>
                               </HBox>
                            </content>
