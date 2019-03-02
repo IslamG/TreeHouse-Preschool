@@ -75,7 +75,7 @@ public class TeacherInfoController implements Initializable {
         }
         else{
             searchField.setStyle("-fx-border-color:none;");
-            databaseConfig dbc=new databaseConfig();
+            DatabaseConfig dbc=new DatabaseConfig();
             Connection conn= (Connection)dbc.connect();
             String sql= "select * from user where fname= ?";
             PreparedStatement pr= conn.prepareStatement(sql);
@@ -120,7 +120,7 @@ public class TeacherInfoController implements Initializable {
         else{
             //update info based on not blank fields only
             String sql="update user set ";
-            databaseConfig dbc=new databaseConfig();
+            DatabaseConfig dbc=new DatabaseConfig();
             Connection conn=(Connection)dbc.connect();
             if (!lastNameField.getText().equals("")){
                 sql+="lname='"+lastNameField.getText()+"',";
@@ -198,14 +198,18 @@ public class TeacherInfoController implements Initializable {
         }
         else {
             String password=passConfrimField.getText();
-            databaseConfig dbc=new databaseConfig();
+            DatabaseConfig dbc=new DatabaseConfig();
             Connection conn=(Connection)dbc.connect();
-            String sql="select pass from user where fname=?";
+            /*String sql="select pass from user where fname=?";
             PreparedStatement ps=conn.prepareStatement(sql);
             ps.setString(1, name);
             ResultSet rs=ps.executeQuery();
             if(!rs.next()||rs.getString("pass") == null ? password != null : !rs.getString("pass").equals(password))
-             {
+            */
+            AdminPageController apc=new AdminPageController();
+            String userPassword=apc.userPassword;
+            if (password.equals(userPassword))
+                {
                 Alert alert= new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
                 alert.setHeaderText ("Something went wrong");
@@ -213,8 +217,8 @@ public class TeacherInfoController implements Initializable {
                 alert.showAndWait();
              }
             else{
-               sql="update user set lname=null,sname=null,addres=null,hiring_date=null,ssn=null,mname=null,dep=null,gender='male' where fname=?";
-               ps=conn.prepareStatement(sql);
+               String sql="update user set lname=null,sname=null,addres=null,hiring_date=null,ssn=null,mname=null,dep=null,gender='male' where fname=?";
+               PreparedStatement ps=conn.prepareStatement(sql);
                ps.setString(1, name);
                ps.execute();
                alert.setAlertType(Alert.AlertType.CONFIRMATION);

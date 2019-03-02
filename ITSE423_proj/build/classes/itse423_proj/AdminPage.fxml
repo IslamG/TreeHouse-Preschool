@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -8,45 +9,55 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" onMousePressed="#mouseActive" onMouseReleased="#mouseInactive" prefHeight="501.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.AdminPageController">
-   <children>
+<AnchorPane id="AnchorPane" prefHeight="501.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.AdminPageController">
+    <children>
       <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
          <top>
-            <Pane fx:id="header" prefHeight="60.0" prefWidth="629.0" style="-fx-background-color: purple;" BorderPane.alignment="CENTER">
+            <Pane fx:id="header" prefHeight="60.0" prefWidth="629.0" style="-fx-background-color: #330033;" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="21.0" layoutY="18.0" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: rgb(100,255,100);" text="O" />
+                  <Button layoutX="21.0" layoutY="18.0" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: #ffffff; -fx-background-radius: 10;" text="LogOut" textFill="#330033">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font></Button>
                   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="626.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@Misc_Skull.png" />
+                        <Image url="@built-icon.png" />
                      </image></ImageView>
-                  <Label layoutX="54.0" layoutY="22.0" text="Log Out" />
                </children>
             </Pane>
          </top>
          <right>
-            <VBox prefHeight="349.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="349.0" style="-fx-background-color: #ffccff;" BorderPane.alignment="CENTER">
                <children>
                   <Pane prefHeight="200.0">
                      <children>
-                        <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="81.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@Misc_Skull.png" />
-                           </image>
-                           </ImageView>
-                        <Label layoutX="109.0" layoutY="142.0" text="Admin" />
+                        <ImageView fx:id="adminImage" fitHeight="90.0" fitWidth="90.0" layoutX="81.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label layoutX="109.0" layoutY="142.0" text="Admin" textFill="#61125b">
+                           <font>
+                              <Font name="Franklin Gothic Heavy Italic" size="14.0" />
+                           </font></Label>
                      </children>
                   </Pane>
                   <Accordion prefHeight="188.0" prefWidth="252.0">
                      <panes>
-                        <TitledPane animated="false" prefHeight="290.0" text="Manage Personal">
+                        <TitledPane animated="false" prefHeight="290.0" stylesheets="@titledPaneStyle.css" text="Manage Personal">
                            <content>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="updateInfo" mnemonicParsing="false" onAction="#manageSelf" text="Update Profile" />
-                                    <Button fx:id="changePassword" mnemonicParsing="false" onAction="#manageSelf" text="Change Password" />
+                                    <Button fx:id="updateInfo" mnemonicParsing="false" onAction="#manageSelf" text="Update Profile">
+                                       <font>
+                                          <Font name="Times New Roman Bold" size="12.0" />
+                                       </font></Button>
+                                    <Button fx:id="changePassword" mnemonicParsing="false" onAction="#manageSelf" text="Change Password">
+                                        <font>
+                                          <Font name="Times New Roman Bold" size="12.0" />
+                                       </font></Button>
                                  </children>
                               </HBox>
                            </content>
+                           <font>
+                              <Font name="Times New Roman Bold" size="15.0" />
+                           </font>
                         </TitledPane>
                         <TitledPane animated="false" text="Manage Teaching Staff">
                            <content>
@@ -54,13 +65,22 @@
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="39.0" prefWidth="253.0" spacing="20.0">
                                        <children>
-                                          <Button fx:id="editTeacher" mnemonicParsing="false" onAction="#manageTeacher" text="Edit Teacher" />
-                                          <Button fx:id="removeTeacher" mnemonicParsing="false" onAction="#manageTeacher" text="Remove Teacher" />
+                                          <Button fx:id="editTeacher" mnemonicParsing="false" onAction="#manageTeacher" text="Edit Teacher">
+                                             <font>
+                                                <Font name="Times New Roman Bold" size="12.0" />
+                                             </font></Button>
+                                          <Button fx:id="removeTeacher" mnemonicParsing="false" onAction="#manageTeacher" text="Remove Teacher">
+                                             <font>
+                                                <Font name="Times New Roman Bold" size="12.0" />
+                                             </font></Button>
                                        </children>
                                     </HBox>
                                  </children>
                               </AnchorPane>
                            </content>
+                           <font>
+                              <Font name="Times New Roman Bold" size="15.0" />
+                           </font>
                         </TitledPane>
                         <TitledPane animated="false" onContextMenuRequested="#manageEmployee" prefHeight="290.0" text="Manage Employees">
                            <content>
@@ -75,6 +95,9 @@
                                  </children>
                               </AnchorPane>
                            </content>
+                           <font>
+                              <Font name="Times New Roman Bold" size="15.0" />
+                           </font>
                         </TitledPane>
                         <TitledPane animated="false" layoutX="10.0" layoutY="60.0" prefHeight="290.0" text="Manage Students">
                            <content>
@@ -82,7 +105,7 @@
                                  <children>
                                     <HBox prefHeight="42.0" prefWidth="253.0">
                                        <children>
-                                          <TextField prefHeight="25.0" prefWidth="126.0" />
+                                          <TextField fx:id="studentSearchField" prefHeight="25.0" prefWidth="126.0" />
                                           <ComboBox fx:id="studentChoice" onAction="#searchBy" prefHeight="25.0" prefWidth="97.0" promptText="Select search method">
                                             <items>
                                                 <FXCollections fx:factory="observableArrayList">
@@ -96,6 +119,9 @@
                                  </children>
                               </AnchorPane>
                            </content>
+                           <font>
+                              <Font name="Times New Roman Bold" size="15.0" />
+                           </font>
                         </TitledPane>
                         <TitledPane animated="false" layoutX="10.0" layoutY="85.0" prefHeight="290.0" text="Manage Subjects">
                            <content>
@@ -103,7 +129,7 @@
                                  <children>
                                     <HBox layoutX="-1.0" layoutY="-2.0" prefHeight="42.0" prefWidth="253.0">
                                        <children>
-                                          <TextField prefHeight="25.0" prefWidth="126.0" />
+                                          <TextField fx:id="subjectSearchField" prefHeight="25.0" prefWidth="126.0" />
                                           <ComboBox fx:id="subjectChoice" onAction="#searchBy" prefHeight="25.0" prefWidth="97.0" promptText="Select search method">
                                             <items>
                                                 <FXCollections fx:factory="observableArrayList">
@@ -117,6 +143,9 @@
                                  </children>
                               </AnchorPane>
                            </content>
+                           <font>
+                              <Font name="Times New Roman Bold" size="15.0" />
+                           </font>
                         </TitledPane>
                      </panes>
                   </Accordion>
@@ -126,12 +155,18 @@
          <center>
             <AnchorPane fx:id="content" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="1.0" layoutY="2.0" prefHeight="443.0" prefWidth="449.0" style="-fx-background-color: rgb(240,100,240);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Pane layoutX="1.0" layoutY="2.0" prefHeight="443.0" prefWidth="449.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <AnchorPane id="content">
+                        <AnchorPane id="content" prefHeight="384.0" prefWidth="403.0">
                            <children>
-                              <Label layoutX="25.0" layoutY="105.0" prefHeight="27.0" prefWidth="54.0" text="Welcome" />
-                              <Label layoutX="25.0" layoutY="162.0" text="What would you like to do?" />
+                              <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="49.0" layoutY="133.0" prefHeight="27.0" prefWidth="267.0" text="Welcome" textFill="#330033">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="42.0" />
+                                 </font></Label>
+                              <Label layoutX="47.0" layoutY="219.0" prefHeight="50.0" prefWidth="293.0" text="What would you like to do?">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="23.0" />
+                                 </font></Label>
                            </children>
                         </AnchorPane>
                      </children>

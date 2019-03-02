@@ -1,6 +1,10 @@
 package itse423_proj;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -11,11 +15,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -42,10 +51,17 @@ public class AdminPageController {
     private TitledPane userPane, passPane, otherPane;
     @FXML
     private ComboBox <String> studentChoice, subjectChoice;
+    @FXML
+    private ImageView adminImage;
+    @FXML
+    private TextField studentSearchField, subjectSearchField;
+    @FXML
+    private Label welcomeLabel;
      
     public final String userName, userPassword;
     private static String uName, uPass;
-    
+    public String searchStdByName, searchStdById, searchSubById, searchSubByTeach;
+    private Alert alert=new Alert(AlertType.ERROR);
     //initiate username and passowrd(cannot be changed later)
     public AdminPageController() {
         this.userName = uName;
@@ -79,27 +95,22 @@ public class AdminPageController {
             switch(tempButton.getId())
             {
                 //load UpdateSelf with username pane open 
-                //Still doesn't work
                 case "updateInfo":
                     newLoadedPane =  FXMLLoader.load(getClass().getResource("UpdateSelf.fxml"));
                     content.getChildren().clear();
                     content.getChildren().add(newLoadedPane);
                     selfAccordion=(Accordion)newLoadedPane.getChildren().get(0);
-                    
-                    userPane=(TitledPane) newLoadedPane.lookup("#userPane");
-                    selfAccordion.setExpandedPane(userPane);
-                    //userPane.setExpanded(true);
+                    selfAccordion.setExpandedPane(selfAccordion.getPanes().get(0));
                     stage = (Stage) content.getScene().getWindow();
                     stage.sizeToScene();
                     break;
                 //load UpdateSelf with password pane open 
-                //Still doesn't work
                 case "changePassword":
                     newLoadedPane =  FXMLLoader.load(getClass().getResource("UpdateSelf.fxml"));
                     content.getChildren().clear();
                     content.getChildren().add(newLoadedPane);
                     selfAccordion=(Accordion)newLoadedPane.getChildren().get(0);
-                    selfAccordion.setExpandedPane(passPane);
+                    selfAccordion.setExpandedPane(selfAccordion.getPanes().get(1));
                     //passPane.setExpanded(true);
                     stage = (Stage) content.getScene().getWindow();
                     stage.sizeToScene();
@@ -190,32 +201,123 @@ public class AdminPageController {
         Stage stage;
         ComboBox switcher=(ComboBox) event.getSource();
         System.out.println(switcher);
+        Boolean allGood=false;
+        String searchType;
+        Pane newLoadedPane;
         switch(switcher.getId())
         {   
             //load StudentInfo using name value to search 
             case "studentChoice":
-                studentChoice.getValue();
+                searchType=studentChoice.getValue();
                 System.out.println("Search by "+studentChoice.getValue());
-                Pane newLoadedPane;
-                newLoadedPane =  FXMLLoader.load(getClass().getResource("StudentInfo.fxml"));
-                content.getChildren().clear();
-                content.getChildren().add(newLoadedPane);
-                content.setPrefSize(newLoadedPane.getWidth(), newLoadedPane.getHeight());
-                stage = (Stage) content.getScene().getWindow();
-                stage.sizeToScene();
+                if(studentSearchField.getText().equals("")){
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText("Field Cannot Be Empty");
+                    alert.setContentText("Please input student name or ID");
+                    alert.showAndWait();
+                    studentSearchField.setStyle("-fx-border-color:red;");
+                }
+                else{
+                    studentSearchField.setStyle("-fx-border-color:none;");
+                    if(searchType.equalsIgnoreCase("search by ID")){
+
+                        if (isParsable(studentSearchField.getText())){
+                            searchStdById=studentSearchField.getText();
+                            allGood=true;
+                        }
+                        else{
+                            alert.setTitle("ERROR");
+                            alert.setHeaderText("Search Type Mismatch");
+                            alert.setContentText("Check search type and input value and try again");
+                            alert.showAndWait();
+                            studentSearchField.setStyle("-fx-border-color:red;");
+                        }
+                    
+                    }
+                    else{
+                        if (!isParsable(studentSearchField.getText())){
+                        searchStdByName=studentSearchField.getText();
+                        allGood=true;
+                        }
+                        else{
+                            alert.setTitle("ERROR");
+                            alert.setHeaderText("Search Type Mismatch");
+                            alert.setContentText("Check search type and input value and try again");
+                            alert.showAndWait();
+                            studentSearchField.setStyle("-fx-border-color:red;");
+                        }
+                    }
+                    if(allGood){
+                        //create instance of the controller and initiate variables
+                        StudentInfoController stc=(StudentInfoController)new StudentInfoController();
+                        stc.initialize(searchStdById, searchStdByName);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StudentInfo.fxml"));
+                        fxmlLoader.setController(stc);
+                        newLoadedPane = fxmlLoader.load();
+                        content.getChildren().clear();
+                        content.getChildren().add(newLoadedPane);
+                        content.setPrefSize(newLoadedPane.getWidth(), newLoadedPane.getHeight());
+                        stage = (Stage) content.getScene().getWindow();
+                        stage.sizeToScene();
+                    }
+                }
                 break;
-            //load StudentInfor using subject ID to search
+            //load SubjectInfo using subject ID to search
             case "subjectChoice":
-                subjectChoice.getValue();
-                System.out.println("Search by "+subjectChoice.getValue());
-                newLoadedPane =  FXMLLoader.load(getClass().getResource("MarkSearch.fxml"));
-                content.getChildren().clear();
-                content.getChildren().add(newLoadedPane);
-                System.out.println(newLoadedPane);
-                content.setPrefSize(newLoadedPane.getWidth(), newLoadedPane.getHeight());
-                stage = (Stage) content.getScene().getWindow();
-                stage.sizeToScene();
+                searchType=subjectChoice.getValue();
+                if(subjectSearchField.getText().equals("")){
+                    alert.setTitle("ERROR");
+                    alert.setHeaderText("Field Cannot Be Empty");
+                    alert.setContentText("Please input Subject ID or Teacher Name");
+                    alert.showAndWait();
+                    subjectSearchField.setStyle("-fx-border-color:red;");
+                }
+                else{
+                    subjectSearchField.setStyle("-fx-border-color:none;");
+                    if(searchType.equalsIgnoreCase("subject code")){
+
+                        if (isParsable(subjectSearchField.getText())){
+                            searchSubById=subjectSearchField.getText();
+                            allGood=true;
+                        }
+                        else{
+                            alert.setTitle("ERROR");
+                            alert.setHeaderText("Search Type Mismatch");
+                            alert.setContentText("Check search type and input value and try again");
+                            alert.showAndWait();
+                            subjectSearchField.setStyle("-fx-border-color:red;");
+                        }
+                    
+                    }
+                    else{
+                        if (!isParsable(subjectSearchField.getText())){
+                        searchSubByTeach=subjectSearchField.getText();
+                        allGood=true;
+                        }
+                        else{
+                            alert.setTitle("ERROR");
+                            alert.setHeaderText("Search Type Mismatch");
+                            alert.setContentText("Check search type and input value and try again");
+                            alert.showAndWait();
+                            subjectSearchField.setStyle("-fx-border-color:red;");
+                        }
+                    }
+                    if(allGood){
+                        //create instance of the controller and initiate variables
+                        MarkSearchController msc=(MarkSearchController)new MarkSearchController();
+                        msc.initialize(searchSubById, searchSubByTeach);
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MarkSearch.fxml"));
+                        fxmlLoader.setController(msc);
+                        newLoadedPane = fxmlLoader.load();
+                        content.getChildren().clear();
+                        content.getChildren().add(newLoadedPane);
+                        content.setPrefSize(newLoadedPane.getWidth(), newLoadedPane.getHeight());
+                        stage = (Stage) content.getScene().getWindow();
+                        stage.sizeToScene();
+                    }
+                    
                 break;
+            }
         }
     }
     
@@ -236,4 +338,52 @@ public class AdminPageController {
         this.uName = a;
         this.uPass = b;
     }
+    private boolean isParsable(String input){
+        boolean parsable = true;
+        try{
+            Integer.parseInt(input);
+        }catch(Exception e){
+            parsable = false;
+        }
+        return parsable;
+    }
+    public void initialize (){
+        try {
+            setUp();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void setUp() throws SQLException{
+        DatabaseConfig dbc= new DatabaseConfig();
+        Connection conn=(Connection) dbc.connect();
+        String sql="Select * from user where fname=?";
+        PreparedStatement ps=conn.prepareStatement(sql);
+        ps.setString(1,userName);
+        ResultSet rs=ps.executeQuery();
+        if(!rs.next()){
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Something went wrong");
+            alert.showAndWait();
+        }
+        else{
+            String gen=rs.getString("gender");
+            if (gen.equalsIgnoreCase("male")){
+                Image img=new Image(this.getClass().getResourceAsStream("images5NA3WNBL.png"));
+                adminImage.setImage(img);
+            }
+            else{
+                Image img=new Image(this.getClass().getResourceAsStream("User_Profile_Page_008.png"));
+                adminImage.setImage(img);
+            }
+        }
+        dbc.disconnect();
+    }
+    /*public String getSearchForStudent(){
+        System.out.println(studentSearchField.getText());
+        return studentSearchField.getText();
+    }
+    public String getSearchForSubject(){
+        return subjectSearchField.getText();
+    }*/
 }

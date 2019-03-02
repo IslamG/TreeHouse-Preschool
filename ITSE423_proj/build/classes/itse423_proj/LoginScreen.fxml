@@ -21,11 +21,16 @@
             <VBox fx:id="frame" alignment="CENTER" layoutX="62.0" layoutY="173.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="378.0" prefWidth="328.0" spacing="30.0" style="-fx-background-color: rgba(255, 255, 100,0.5);-fx-border-radius: 5%;-fx-background-radius:5%;" StackPane.alignment="CENTER">
                <children>
                   <Label alignment="CENTER" text="Tree House Pre-School" />
-                  <TextField fx:id="userNameField" onKeyPressed="#removeMsg" promptText="Enter user name" />
+                  <TextField fx:id="userNameField" onKeyReleased="#removeMsg" promptText="Enter user name" />
+                  <Label fx:id="capsMsg" textFill="RED">
+                     <graphic>
+                        <Label fx:id="lockImg" />
+                     </graphic>
+                  </Label>
                   <StackPane>
                      <children>
                         <TextField fx:id="passwordText" />
-                        <PasswordField fx:id="passwordField" onKeyPressed="#removeMsg" promptText="Enter your password" />
+                        <PasswordField fx:id="passwordField" onKeyReleased="#removeMsg" promptText="Enter your password" />
                         <CheckBox fx:id="eye" alignment="CENTER_RIGHT" mnemonicParsing="false" stylesheets="@eyeStyle.css" StackPane.alignment="CENTER_RIGHT" />
                      </children>
                   </StackPane>

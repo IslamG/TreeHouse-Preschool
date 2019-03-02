@@ -4,17 +4,18 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="488.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="488.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TableView layoutX="56.0" layoutY="62.0" prefHeight="354.0" prefWidth="376.0">
         <columns>
-          <TableColumn prefWidth="64.0" text="NO." />
-          <TableColumn prefWidth="224.0" text="Std. Name" />
-            <TableColumn prefWidth="87.0" text="Final Grade" />
+          <TableColumn fx:id="stdNo" prefWidth="64.0" text="NO." />
+          <TableColumn fx:id="stdName" prefWidth="224.0" text="Std. Name" />
+            <TableColumn fx:id="stdGrade" prefWidth="87.0" text="Final Grade" />
         </columns>
       </TableView>
       <Label layoutX="56.0" layoutY="29.0" text="Subject" />
       <Label layoutX="266.0" layoutY="29.0" text="Prof." />
+      <Label fx:id="subjectNameField" layoutX="110.0" layoutY="29.0" />
+      <Label fx:id="teacherNameField" layoutX="313.0" layoutY="29.0" />
    </children>
 </AnchorPane>

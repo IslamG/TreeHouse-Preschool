@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author New
  */
-public class databaseConfig {
+public class DatabaseConfig {
     
     String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     String DB_URL = "jdbc:mysql://localhost/treehouseschool";
@@ -31,7 +31,7 @@ public class databaseConfig {
             System.out.println("connected");    
         }           
         catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(databaseConfig.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DatabaseConfig.class.getName()).log(Level.SEVERE, null, ex);
         }
     return conn; 
     }

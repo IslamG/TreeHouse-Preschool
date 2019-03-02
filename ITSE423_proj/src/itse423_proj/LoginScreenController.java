@@ -6,6 +6,8 @@
 package itse423_proj;
 
 import com.mysql.jdbc.Connection;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -17,7 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,7 +33,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -53,7 +53,7 @@ public class LoginScreenController implements Initializable {
     @FXML
     private PasswordField passwordField;
     @FXML
-    private Label errorMsg;
+    private Label errorMsg, capsMsg, lockImg;
     @FXML
     private CheckBox eye;
     @FXML
@@ -116,7 +116,7 @@ public class LoginScreenController implements Initializable {
 
     @FXML
     private void login(ActionEvent event) throws SQLException {
-        databaseConfig dbc= new databaseConfig();
+        DatabaseConfig dbc= new DatabaseConfig();
         try {
             String name = userNameField.getText();
             String password = passwordField.getText();
@@ -157,24 +157,24 @@ public class LoginScreenController implements Initializable {
                 Stage stage=new Stage();
                 stage.setScene(scene);
                 //add event listener onto newly loaded scene (same as mosue active and mouse inactive)
-                scene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {//setOnMousePressed(new EventHandler<MouseEvent>() {
+                /*scene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {//setOnMousePressed(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
                         Scene scene = content.getScene();
-                        Image image = new Image(this.getClass().getResourceAsStream("pencil2.png"));  
+                        Image image = new Image(AdminPageController.class.getResourceAsStream("pencil2.png"));  
                         scene.setCursor(new ImageCursor(image));
-                        System.out.println("Hi");
+                        System.out.println("Hi "+image);
                     }
                     });
                 scene.addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
                         Scene scene = content.getScene();
-                        Image image = new Image(this.getClass().getResourceAsStream("pencil.png"));  
+                        Image image = new Image(AdminPageController.class.getResourceAsStream("pencil.png"));  
                         scene.setCursor(new ImageCursor(image));
-                        System.out.println("Bye");
+                        System.out.println("Bye "+image);
                     }
-                    });
+                    });*/
                 stage.show();
                 Node source = (Node) event.getSource();
                 Stage stage2 = (Stage) source.getScene().getWindow();
@@ -189,10 +189,43 @@ public class LoginScreenController implements Initializable {
 
 }
     @FXML
-    private void removeMsg(){
+    private void removeMsg(javafx.scene.input.KeyEvent event){
         if (!(errorMsg.getText().equals(""))){
             errorMsg.setText("");
         }
+        boolean isOn;
+        String image;
+        String m="CAPSLOCK is on, password is case sensitive\n";
+        isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
+        //System.out.println(Toolkit.getDefaultToolkit().getLockingKeyState(20)+" "+isOn);
+            if(event.getCode().toString().equals("CAPS")){
+                //isOn = !isOn;
+                capsMsg.setText(m);
+                image = LoginScreenController.class.getResource("eye.png").toExternalForm();
+                lockImg.setStyle("-fx-background-image:url('"+image+"')");
+            }
+            else if(isOn){
+                capsMsg.setText("");
+            
+        }
+    }
+    
+    private void capsCheck(javafx.scene.input.KeyEvent event){
+        boolean isOn;
+        String image;
+        String m="CAPSLOCK is on, password is case sensitive\n";
+        isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
+            if(event.getCode().toString().equals("CAPS")){
+                //isOn = !isOn;
+                capsMsg.setText(m);
+                image = LoginScreenController.class.getResource("Unlock.ico").toExternalForm();
+                lockImg.setStyle("-fx-background-image:url('"+image+"')");
+            }
+        else{
+            capsMsg.setText("");
+            
+        }
+            
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -202,5 +235,5 @@ public class LoginScreenController implements Initializable {
         passwordText.visibleProperty().bind(eye.selectedProperty());
         start();
     }    
-    
+ 
 }

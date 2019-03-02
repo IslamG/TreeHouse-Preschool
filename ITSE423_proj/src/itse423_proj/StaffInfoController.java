@@ -8,7 +8,6 @@ package itse423_proj;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -18,7 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 
 /**
@@ -53,7 +51,7 @@ public class StaffInfoController implements Initializable {
         }
         //check if password is correct
         else if (newPass.getText().equals(confirmPass.getText())){
-            databaseConfig dbc=new databaseConfig();
+            DatabaseConfig dbc=new DatabaseConfig();
             Connection conn=(Connection)dbc.connect();
             String sql="Insert into user(fname, pass, job) values (?,?,?)";
             PreparedStatement ps= conn.prepareStatement(sql);
@@ -98,14 +96,12 @@ public class StaffInfoController implements Initializable {
     private void removeUser () throws SQLException{
         String name=searchName.getText();
         String password=confirmName.getText();
-        databaseConfig dbc=new databaseConfig();
+        DatabaseConfig dbc=new DatabaseConfig();
         Connection conn=dbc.connect();
-        String sql = "SELECT pass from user where fname= ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setString(1, name);
-        ResultSet rs = ps.executeQuery();
-        //if password is empty or incorrect
-        if ((!rs.next()) ||(rs.getString("pass") == null ? password != null : !rs.getString("pass").equals(password))) {
+        //get logged in user's password
+        AdminPageController apc=new AdminPageController();
+        String userPass=apc.userPassword;
+        if (!password.equals(userPass)){    
             alert.setTitle("REMOVE FAILED");
             alert.setHeaderText ("Something went wrong when trying to remove user");
             alert.setContentText("Check your password and/or emp name and try again");
@@ -113,8 +109,8 @@ public class StaffInfoController implements Initializable {
                 
             } 
         else {
-            sql="delete from user where fname=?";
-            ps=conn.prepareStatement(sql);
+            String sql="delete from user where fname=?";
+            PreparedStatement ps=conn.prepareStatement(sql);
             ps.setString(1, name);
             if (ps.execute()){
                 alert.setAlertType(Alert.AlertType.CONFIRMATION);

@@ -5,6 +5,7 @@
  */
 package itse423_proj;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.print.PrinterJob;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -54,31 +56,52 @@ public class StudentInfoController implements Initializable {
     @FXML
     private AnchorPane root;
     
+    private static String searchStdByName, searchStdById;
+    
+
+    @FXML
+    void initialize(String a, String b) throws IOException{
+        //initilize with search values
+        StudentInfoController.searchStdById=a;
+        StudentInfoController.searchStdByName=b;
+    }
+    public String getStuff(){
+        return this.fnameField.toString();
+    }
     @FXML
     //send data to printer (Save or Print)
     private void saveInfo (){
             PrinterJob job = PrinterJob.createPrinterJob();
             if(job != null){
             job.showPrintDialog(root.getScene().getWindow()); 
-            job.printPage(root);
+            //create a copy of the scene (so you can remove buttons from output image)
+            AnchorPane printable=root;
+            printable.getChildren().remove(printable.lookup(".button"));
+            job.printPage(printable);
             job.endJob();
             }
     }
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+
+    private void setUp(){
         try {
             // get student data and fill fields
-            databaseConfig dbc=new databaseConfig();
+            DatabaseConfig dbc=new DatabaseConfig();
             Connection conn=(Connection) dbc.connect();
-            String sql="Select * from student where fname=?";
+            String sql=null;
+            if (searchStdById==null){
+                sql="Select * from student where fname='"+searchStdByName+"'";
+                System.out.println(searchStdByName+" "+sql);
+            }
+            else{
+                sql="Select * from student where student_id="+searchStdById;
+                System.out.println(searchStdById+" "+sql);
+            }
             PreparedStatement ps=conn.prepareStatement(sql);
-            //TODO get student name or ID value from search field
-            ps.setString(1,"Moez");
+            System.out.println(ps);
+            //Get student name or ID value from search field
             ResultSet rs=ps.executeQuery();
             if (rs.next()){
+                System.out.println("doing "+rs.getString("fname"));
                 fnameField.setText(rs.getString("fname"));
                 lnameField.setText(rs.getString("lname"));
                 genderField.setText(rs.getString("gender"));
@@ -96,10 +119,38 @@ public class StudentInfoController implements Initializable {
                    idImage.setImage(new Image(this.getClass().getResourceAsStream("generic-user-female.png")));
                 }
             }
+            else{
+                //display error message in place of usual children
+                root.getChildren().clear();//remove(root.lookup("#notFound"));
+                String m="Oops something went wrong, can't find student with ";
+                if(searchStdById==null){
+                    m+="name: "+searchStdByName;
+                }
+                else{
+                    m+="ID: "+searchStdById;
+                }
+                Label l=new Label(m);
+                l.setId("notFound");
+                l.setAlignment(Pos.CENTER);
+                l.setTranslateY(90);
+                l.setTranslateX(20);
+                l.setStyle("-fx-font-size:15px;");
+                searchStdById=null;
+                searchStdByName=null;
+                root.getChildren().add(l);
+                
+            }
             dbc.disconnect();
         } catch (SQLException ex) {
             Logger.getLogger(StudentInfoController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
+    
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //TODO
+        setUp();
+    }
     
 }
