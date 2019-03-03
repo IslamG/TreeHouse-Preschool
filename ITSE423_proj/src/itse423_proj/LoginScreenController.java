@@ -188,6 +188,7 @@ public class LoginScreenController implements Initializable {
         }
 
 }
+    //private boolean isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
     @FXML
     private void removeMsg(javafx.scene.input.KeyEvent event){
         if (!(errorMsg.getText().equals(""))){
@@ -197,16 +198,17 @@ public class LoginScreenController implements Initializable {
         String image;
         String m="CAPSLOCK is on, password is case sensitive\n";
         isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
-        //System.out.println(Toolkit.getDefaultToolkit().getLockingKeyState(20)+" "+isOn);
+        System.out.println(Toolkit.getDefaultToolkit().getLockingKeyState(20)+" "+isOn);
             if(event.getCode().toString().equals("CAPS")){
                 //isOn = !isOn;
                 capsMsg.setText(m);
-                image = LoginScreenController.class.getResource("eye.png").toExternalForm();
+                image = LoginScreenController.class.getResource("capsOn2.png").toExternalForm();
                 lockImg.setStyle("-fx-background-image:url('"+image+"')");
             }
             else if(isOn){
                 capsMsg.setText("");
-            
+                image = LoginScreenController.class.getResource("capsOff.png").toExternalForm();
+                lockImg.setStyle("-fx-background-image:url('"+image+"')");
         }
     }
     
@@ -216,7 +218,7 @@ public class LoginScreenController implements Initializable {
         String m="CAPSLOCK is on, password is case sensitive\n";
         isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
             if(event.getCode().toString().equals("CAPS")){
-                //isOn = !isOn;
+                isOn = !isOn;
                 capsMsg.setText(m);
                 image = LoginScreenController.class.getResource("Unlock.ico").toExternalForm();
                 lockImg.setStyle("-fx-background-image:url('"+image+"')");

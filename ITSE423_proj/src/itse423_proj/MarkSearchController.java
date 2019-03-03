@@ -11,14 +11,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -29,11 +33,11 @@ import javafx.scene.layout.AnchorPane;
 public class MarkSearchController implements Initializable {
 
     @FXML
-    private TableColumn<?, ?> stdNo;
+    private TableColumn<ResultSet, String> stdNo;
     @FXML
-    private TableColumn<?, ?> stdName;
+    private TableColumn<String, String> stdName;
     @FXML
-    private TableColumn<?, ?> stdGrade;
+    private TableColumn<String, String> stdGrade;
     @FXML
     private Label subjectNameField;
     @FXML
@@ -117,6 +121,12 @@ public class MarkSearchController implements Initializable {
             rs=ps.executeQuery();
             if (rs.next()){
                 System.out.println("TODO populate list");
+                //ObservableList<String> data=FXCollections.observableArrayList();
+                //data.addAll((Collection<String>)rs.getArray("std_id"));
+                stdNo.setCellValueFactory(
+                    new PropertyValueFactory<ResultSet, String>("std_id"));
+                //System.out.println(stdNo.);
+
             }
             else{
                 //display error message in place of usual children

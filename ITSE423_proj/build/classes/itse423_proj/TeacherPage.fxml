@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -59,11 +60,13 @@
             </VBox>
          </right>
          <top>
-            <Pane fx:id="header" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: purple;" BorderPane.alignment="CENTER">
+            <Pane fx:id="header" prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #330033;" BorderPane.alignment="CENTER">
                <children>
-                  <Button layoutX="21.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: rgb(100,255,100);" text="O" />
+                  <Button layoutX="21.0" layoutY="18.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: rgb(100,255,100);" text="LogOut">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="12.0" />
+                     </font></Button>
                   <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="543.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label layoutX="54.0" layoutY="22.0" text="Log Out" />
                </children>
             </Pane>
          </top>

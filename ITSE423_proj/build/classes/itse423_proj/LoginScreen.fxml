@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -20,22 +21,35 @@
             </ImageView>
             <VBox fx:id="frame" alignment="CENTER" layoutX="62.0" layoutY="173.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="378.0" prefWidth="328.0" spacing="30.0" style="-fx-background-color: rgba(255, 255, 100,0.5);-fx-border-radius: 5%;-fx-background-radius:5%;" StackPane.alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" text="Tree House Pre-School" />
-                  <TextField fx:id="userNameField" onKeyReleased="#removeMsg" promptText="Enter user name" />
-                  <Label fx:id="capsMsg" textFill="RED">
-                     <graphic>
-                        <Label fx:id="lockImg" />
-                     </graphic>
-                  </Label>
-                  <StackPane>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="203.0" text="Tree House Pre-School">
+                     <font>
+                        <Font name="Times New Roman Bold" size="20.0" />
+                     </font></Label>
+                  <TextField fx:id="userNameField" onKeyReleased="#removeMsg" prefHeight="34.0" prefWidth="288.0" promptText="Enter user name" />
+                  <VBox>
                      <children>
-                        <TextField fx:id="passwordText" />
-                        <PasswordField fx:id="passwordField" onKeyReleased="#removeMsg" promptText="Enter your password" />
-                        <CheckBox fx:id="eye" alignment="CENTER_RIGHT" mnemonicParsing="false" stylesheets="@eyeStyle.css" StackPane.alignment="CENTER_RIGHT" />
+                        <StackPane>
+                           <children>
+                              <TextField fx:id="passwordText" />
+                              <PasswordField fx:id="passwordField" onKeyReleased="#removeMsg" prefHeight="31.0" prefWidth="288.0" promptText="Enter your password" />
+                              <CheckBox fx:id="eye" alignment="CENTER_RIGHT" mnemonicParsing="false" stylesheets="@eyeStyle.css" StackPane.alignment="CENTER_RIGHT" />
+                           </children>
+                        </StackPane>
+                        <Label fx:id="capsMsg" textAlignment="CENTER" textFill="RED">
+                           <graphic>
+                              <Label fx:id="lockImg" prefHeight="26.0" prefWidth="26.0" style="-fx-background-radius:25%;" />
+                           </graphic>
+                           <VBox.margin>
+                              <Insets right="20.0" />
+                           </VBox.margin>
+                        </Label>
                      </children>
-                  </StackPane>
-                  <Button mnemonicParsing="false" onAction="#login" text="LOGIN" />
-                  <Label fx:id="errorMsg" textFill="RED" />
+                  </VBox>
+                  <Button mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="124.0" style="-fx-background-radius: 10;" text="LOGIN">
+                     <font>
+                        <Font name="Times New Roman Bold" size="18.0" />
+                     </font></Button>
+                  <Label fx:id="errorMsg" prefHeight="25.0" prefWidth="264.0" textFill="RED" />
                </children>
                <padding>
                   <Insets left="20.0" right="20.0" />
