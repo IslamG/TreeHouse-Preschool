@@ -11,19 +11,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.print.PrinterJob;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -31,22 +36,27 @@ import javafx.scene.layout.AnchorPane;
  * @author New
  */
 public class MarkSearchController implements Initializable {
-
+    
     @FXML
-    private TableColumn<ResultSet, String> stdNo;
+    private TableView<MarkTable> markTable;
     @FXML
-    private TableColumn<String, String> stdName;
+    private TableColumn<MarkTable, String> stdNo;
     @FXML
-    private TableColumn<String, String> stdGrade;
+    private TableColumn<MarkTable, String> stdName;
+    @FXML
+    private TableColumn<MarkTable, String> stdGrade;
     @FXML
     private Label subjectNameField;
     @FXML
     private Label teacherNameField;
     @FXML
     private AnchorPane root;
+    @FXML
+    private Pane overlay;
     
     private static String searchSubById, searchSubByTeach;
-    
+    private ArrayList<String> myList = new ArrayList<>();
+    PieChart chart=new PieChart();
 
     @FXML
     void initialize(String a, String b) throws IOException{
@@ -60,7 +70,8 @@ public class MarkSearchController implements Initializable {
             // get subject data and fill fields
             DatabaseConfig dbc=new DatabaseConfig();
             Connection conn=(Connection) dbc.connect();
-            String sql=null, getCourseName=null, getProfId=null,getProfName=null, getCourseId=null;
+            String sql=null, getCourseName=null, getProfId=null,getProfName=searchSubByTeach, 
+                    getCourseId=searchSubById, stdId, name=null;
             ResultSet rs;
             PreparedStatement ps=null;
             if (searchSubById==null){
@@ -84,7 +95,7 @@ public class MarkSearchController implements Initializable {
                 if (rs.next())
                     getCourseName=rs.getString(1);
                 //search for info data
-                sql="Select * from marks where prof_id="+getProfId;
+                sql="Select * from marks inner join student on marks.std_id=student.student_id where prof_id="+getProfId;
                 getProfName=searchSubByTeach;
                 
             }
@@ -109,7 +120,7 @@ public class MarkSearchController implements Initializable {
                 if (rs.next())
                     getProfName=rs.getString(1);
                 //search for info data
-                sql="Select * from marks where course_id="+searchSubById;
+                sql="Select * from marks inner join student on marks.std_id=student.student_id where marks.course_id="+searchSubById;
                 
             }
             //set header values
@@ -120,13 +131,32 @@ public class MarkSearchController implements Initializable {
             //Get subject info
             rs=ps.executeQuery();
             if (rs.next()){
-                System.out.println("TODO populate list");
-                //ObservableList<String> data=FXCollections.observableArrayList();
-                //data.addAll((Collection<String>)rs.getArray("std_id"));
-                stdNo.setCellValueFactory(
-                    new PropertyValueFactory<ResultSet, String>("std_id"));
-                //System.out.println(stdNo.);
-
+                int i=0;
+                //put retrieved table data in list to be viewed
+                ObservableList<MarkTable> data=FXCollections.observableArrayList();
+                ObservableList<PieChart.Data>list=FXCollections.observableArrayList();
+                while (rs.next()){
+                    //get student full name
+                    name= rs.getString("fname")+" "+rs.getString("lname");
+                    i++;
+                    //create a row (custome class) with data
+                    MarkTable row=new MarkTable(i,name,rs.getString("mark"));
+                    //setting row values in columns (filling horizontally then vertically) 
+                    stdNo.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getIndex()));
+                    stdName.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getName()));
+                    stdGrade.setCellValueFactory(c-> new SimpleStringProperty(c.getValue().getMark()));
+                    
+                    data.add(row);
+                    markTable.setItems(data);
+                    //create pie chart from data
+                    list.add(new PieChart.Data(row.getName(),Double.valueOf(row.getMark())));
+                } 
+                //add to table
+                markTable.getColumns().clear();
+                markTable.getColumns().addAll(stdNo,stdName,stdGrade);
+                chart.setTitle(getCourseName);
+                chart.setStartAngle(180);
+                chart.setData(list);
             }
             else{
                 //display error message in place of usual children
@@ -154,8 +184,39 @@ public class MarkSearchController implements Initializable {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-
+    @FXML
+    //dynamically create chart screen with data and buttnos
+    private void getChart(){
+        Button btn= new Button("Save");
+        btn.setLayoutX(250); 
+        btn.setLayoutY(428.0);
+        btn.setOnAction(e-> saveInfo());
+        btn.setStyle("-fx-border-radius: 5; -fx-background-radius: 5; -fx-font-family:'Times New Roman'; -fx-font-size:15px;");
+        Button btn2= new Button("Back");
+        btn2.setLayoutX(25); 
+        btn2.setLayoutY(25);
+        btn2.setOnAction(e-> back());
+        btn2.setStyle("-fx-border-radius: 5; -fx-background-radius: 5; -fx-font-family:'Times New Roman'; -fx-font-size:15px;");
+        overlay.getChildren().addAll(chart,btn,btn2);
+        overlay.setManaged(true);
+        overlay.setVisible(true);
+    }
+    //output chart screen to PDF or Printer
+    private void saveInfo(){
+        PrinterJob job = PrinterJob.createPrinterJob();
+        System.out.println("Doing");
+        if(job != null){
+            job.showPrintDialog(root.getScene().getWindow()); 
+            job.printPage(overlay);
+            job.endJob();
+        }
+    }
+    //hide and disable chart screen
+    private void back(){
+        overlay.getChildren().removeAll(overlay.getChildren());
+        overlay.setVisible(false);
+        overlay.setManaged(false);
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO

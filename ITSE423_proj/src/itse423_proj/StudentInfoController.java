@@ -135,8 +135,8 @@ public class StudentInfoController implements Initializable {
                 l.setTranslateY(90);
                 l.setTranslateX(20);
                 l.setStyle("-fx-font-size:15px;");
-                searchStdById=null;
-                searchStdByName=null;
+                searchStdById="";
+                searchStdByName="";
                 root.getChildren().add(l);
                 
             }

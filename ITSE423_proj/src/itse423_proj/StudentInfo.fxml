@@ -1,90 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="517.0" style="-fx-border-color: #330033;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="517.0" style="-fx-border-color: #330033; -fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="105.0" prefWidth="517.0" style="-fx-background-color: #ffccff; -fx-border-color: #330033;" />
       <ImageView fx:id="idImage" fitHeight="82.0" fitWidth="98.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="14.0" layoutY="167.0" prefHeight="28.0" prefWidth="98.0" text="First Name:">
-         <font>
-            <Font name="Times New Roman Bold" size="18.0" />
-         </font></Label>
-      <Label layoutX="14.0" layoutY="217.0" prefHeight="28.0" prefWidth="98.0" text="Last Name:">
-         <font>
-            <Font name="Times New Roman Bold" size="18.0" />
-         </font></Label>
-      <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="267.0" prefHeight="28.0" prefWidth="98.0" text="Gender:">
-         <font>
-            <Font name="Times New Roman Bold" size="18.0" />
-         </font></Label>
-      <Label alignment="CENTER_RIGHT" layoutX="259.0" layoutY="223.0" prefHeight="28.0" prefWidth="110.0" text="Class:">
-         <font>
-            <Font name="Times New Roman Bold" size="18.0" />
-         </font></Label>
-      <Label fx:id="fnameField" layoutX="121.0" layoutY="167.0" prefHeight="28.0" prefWidth="119.0" style="-fx-background-color: ;">
-         <font>
-            <Font name="Times New Roman Bold" size="16.0" />
-         </font></Label>
-      <Label fx:id="lnameField" layoutX="121.0" layoutY="217.0" prefHeight="28.0" prefWidth="119.0">
-         <font>
-            <Font name="Times New Roman Bold" size="16.0" />
-         </font></Label>
-      <Label fx:id="genderField" layoutX="121.0" layoutY="267.0" prefHeight="28.0" prefWidth="119.0">
-         <font>
-            <Font name="Times New Roman Bold" size="16.0" />
-         </font></Label>
-      <Label fx:id="classField" layoutX="385.0" layoutY="223.0" prefHeight="28.0" prefWidth="119.0">
-         <font>
-            <Font name="Times New Roman Bold" size="16.0" />
-         </font></Label>
-      <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="317.0" prefHeight="28.0" prefWidth="98.0" text="Address:">
-         <font>
-            <Font name="Times New Roman Bold" size="18.0" />
-         </font></Label>
-      <Label layoutX="23.0" layoutY="368.0" prefHeight="28.0" prefWidth="98.0" text="BirthPlace:">
-         <font>
-            <Font name="Times New Roman Bold" size="18.0" />
-         </font></Label>
-      <Label alignment="CENTER_RIGHT" layoutX="259.0" layoutY="368.0" prefHeight="28.0" prefWidth="110.0" text="Birthday:">
-         <font>
-            <Font name="Times New Roman Bold" size="18.0" />
-         </font></Label>
-      <Label alignment="CENTER_RIGHT" layoutX="256.0" layoutY="267.0" prefHeight="28.0" prefWidth="110.0" text="Enroll date:">
-         <font>
-            <Font name="Times New Roman Bold" size="18.0" />
-         </font></Label>
-      <Label alignment="CENTER_RIGHT" layoutX="259.0" layoutY="321.0" prefHeight="28.0" prefWidth="110.0" text="Father phone:">
-         <font>
-            <Font name="Times New Roman Bold" size="18.0" />
-         </font></Label>
-      <Label fx:id="addressField" layoutX="121.0" layoutY="317.0" prefHeight="28.0" prefWidth="119.0">
-         <font>
-            <Font name="Times New Roman Bold" size="16.0" />
-         </font></Label>
-      <Label fx:id="birthplaceField" layoutX="121.0" layoutY="368.0" prefHeight="28.0" prefWidth="119.0">
-         <font>
-            <Font name="Times New Roman Bold" size="16.0" />
-         </font></Label>
-      <Label fx:id="birthdayField" layoutX="385.0" layoutY="368.0" prefHeight="28.0" prefWidth="119.0" style="-fx-background-color: ;">
-         <font>
-            <Font name="Times New Roman Bold" size="16.0" />
-         </font></Label>
-      <Label fx:id="addDateField" layoutX="385.0" layoutY="271.0" prefHeight="28.0" prefWidth="119.0">
-         <font>
-            <Font name="Times New Roman Bold" size="16.0" />
-         </font></Label>
-      <Label fx:id="fatherNumField" layoutX="385.0" layoutY="321.0" prefHeight="28.0" prefWidth="119.0" style="-fx-background-color: ;">
-         <font>
-            <Font name="Times New Roman Bold" size="16.0" />
-         </font></Label>
+      <GridPane alignment="CENTER_LEFT" layoutX="24.0" layoutY="176.0" prefHeight="295.0" prefWidth="469.0" style="-fx-border-color: grey;">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="102.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="127.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="122.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="110.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="317.0" prefWidth="150.0" style="-fx-border-color: grey; -fx-border-radius: 10px;" text="Address:" textAlignment="JUSTIFY" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="1.0" left="3.0" right="3.0" top="1.0" />
+               </padding>
+            </Label>
+            <Label layoutX="259.0" layoutY="321.0" prefWidth="150.0" style="-fx-border-color: grey; -fx-border-radius: 10px;" text="Father phone:" textAlignment="JUSTIFY" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="1.0" left="3.0" right="3.0" top="1.0" />
+               </padding>
+            </Label>
+            <Label fx:id="addressField" layoutX="121.0" layoutY="317.0" prefWidth="100.0" style="-fx-background-color: rgb(255,200,200); -fx-background-radius: 15px;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="5.0" right="2.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="259.0" layoutY="223.0" prefWidth="150.0" style="-fx-border-color: grey; -fx-border-radius: 10px;" text="Class:" textAlignment="JUSTIFY" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="1.0" left="3.0" right="3.0" top="1.0" />
+               </padding>
+            </Label>
+            <Label layoutX="259.0" layoutY="368.0" prefWidth="150.0" style="-fx-border-color: grey; -fx-border-radius: 10px;" text="Birthday:" textAlignment="JUSTIFY" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="1.0" left="3.0" right="3.0" top="1.0" />
+               </padding>
+            </Label>
+            <Label layoutX="14.0" layoutY="267.0" prefWidth="150.0" style="-fx-border-color: grey; -fx-border-radius: 10px;" text="Gender:" textAlignment="JUSTIFY" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="1.0" left="3.0" right="3.0" top="1.0" />
+               </padding>
+            </Label>
+            <Label fx:id="lnameField" layoutX="121.0" layoutY="217.0" prefWidth="100.0" style="-fx-background-color: rgb(255,200,200); -fx-background-radius: 15px;" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="5.0" right="2.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="256.0" layoutY="267.0" prefWidth="150.0" style="-fx-border-color: grey; -fx-border-radius: 10px;" text="Enroll date:" textAlignment="JUSTIFY" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="1.0" left="3.0" right="3.0" top="1.0" />
+               </padding>
+            </Label>
+            <Label fx:id="birthdayField" layoutX="385.0" layoutY="368.0" prefWidth="100.0" style="-fx-background-color: rgb(255,200,200); -fx-background-radius: 15px;" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="5.0" right="2.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="14.0" layoutY="167.0" prefWidth="150.0" style="-fx-border-color: grey; -fx-border-radius: 10px;" text="First Name:" textAlignment="JUSTIFY" GridPane.hgrow="ALWAYS">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="1.0" left="3.0" right="3.0" top="1.0" />
+               </padding>
+            </Label>
+            <Label layoutX="23.0" layoutY="368.0" prefWidth="150.0" style="-fx-border-color: grey; -fx-border-radius: 10px;" text="BirthPlace:" textAlignment="JUSTIFY" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="1.0" left="3.0" right="3.0" top="1.0" />
+               </padding>
+            </Label>
+            <Label fx:id="birthplaceField" layoutX="121.0" layoutY="368.0" prefWidth="100.0" style="-fx-background-color: rgb(255,200,200); -fx-background-radius: 15px;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="5.0" right="2.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="fnameField" layoutX="121.0" layoutY="167.0" prefWidth="100.0" style="-fx-background-color: rgb(255,200,200); -fx-background-radius: 15px;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="5.0" right="2.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="classField" layoutX="385.0" layoutY="223.0" prefWidth="100.0" style="-fx-background-color: rgb(255,200,200); -fx-background-radius: 15px;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="5.0" right="2.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="genderField" layoutX="121.0" layoutY="267.0" prefWidth="100.0" style="-fx-background-color: rgb(255,200,200); -fx-background-radius: 15px;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="5.0" right="2.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="addDateField" layoutX="385.0" layoutY="271.0" prefWidth="100.0" style="-fx-background-color: rgb(255,200,200); -fx-background-radius: 15px;" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="5.0" right="2.0" />
+               </GridPane.margin>
+            </Label>
+            <Label fx:id="fatherNumField" layoutX="385.0" layoutY="321.0" prefWidth="100.0" style="-fx-background-color: rgb(255,200,200); -fx-background-radius: 15px;" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Times New Roman Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="5.0" right="2.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="14.0" layoutY="217.0" prefWidth="150.0" style="-fx-border-color: grey; -fx-border-radius: 10px;" text="Last Name:" textAlignment="JUSTIFY" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS">
+               <font>
+                  <Font name="Times New Roman Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="1.0" left="3.0" right="3.0" top="1.0" />
+               </padding>
+            </Label>
+            <Separator prefHeight="3.0" prefWidth="460.0" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+         </children>
+         <padding>
+            <Insets left="3.0" right="3.0" />
+         </padding>
+      </GridPane>
       <Button fx:id="saveButton" layoutX="396.0" layoutY="43.0" mnemonicParsing="false" onAction="#saveInfo" prefHeight="28.0" prefWidth="79.0" style="-fx-background-color: #330033; -fx-background-radius: 5;" text="Save Info" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="14.0" />
          </font></Button>
+      <Label layoutX="8.0" layoutY="124.0" style="-fx-background-color: rgb(155,255,255); -fx-background-radius: 15px;" text="Student Information">
+         <font>
+            <Font name="Times New Roman Bold" size="23.0" />
+         </font>
+         <padding>
+            <Insets bottom="2.0" left="5.0" right="5.0" top="2.0" />
+         </padding>
+      </Label>
    </children>
 </AnchorPane>

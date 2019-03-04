@@ -197,15 +197,10 @@ public class TeacherInfoController implements Initializable {
             searchField.setStyle("-fx-border-color:red;");
         }
         else {
+            //confirm input password matches logged in user
             String password=passConfrimField.getText();
             DatabaseConfig dbc=new DatabaseConfig();
             Connection conn=(Connection)dbc.connect();
-            /*String sql="select pass from user where fname=?";
-            PreparedStatement ps=conn.prepareStatement(sql);
-            ps.setString(1, name);
-            ResultSet rs=ps.executeQuery();
-            if(!rs.next()||rs.getString("pass") == null ? password != null : !rs.getString("pass").equals(password))
-            */
             AdminPageController apc=new AdminPageController();
             String userPassword=apc.userPassword;
             if (password.equals(userPassword))

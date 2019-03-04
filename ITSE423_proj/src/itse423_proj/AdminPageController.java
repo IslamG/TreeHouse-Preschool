@@ -19,24 +19,36 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.InnerShadow;
+import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class AdminPageController {
 
     @FXML
-    private Pane header;
+    private Pane aniPane;
     @FXML
-    private AnchorPane staffInfoAnch, content;
+    private HBox header;
+    @FXML
+    private VBox content, notificationPane;
+    @FXML
+    private AnchorPane staffInfoAnch;
     @FXML
     private TabPane staffTab;
     @FXML
@@ -56,7 +68,7 @@ public class AdminPageController {
     @FXML
     private TextField studentSearchField, subjectSearchField;
     @FXML
-    private Label welcomeLabel;
+    private Label welcomeLabel, qLabel;
      
     public final String userName, userPassword;
     private static String uName, uPass;
@@ -378,12 +390,39 @@ public class AdminPageController {
             }
         }
         dbc.disconnect();
+    //add effects to welcom label
+    Bloom bl=new Bloom();
+        bl.setThreshold(0.0);
+        DropShadow ds = new DropShadow();
+        ds.setOffsetY(10);
+        ds.setOffsetX(10);
+        ds.setSpread(0.2);
+        ds.setColor(new Color(0,0,0,0.5));
+        ds.setBlurType(BlurType.GAUSSIAN);
+        InnerShadow is = new InnerShadow();
+        is.setRadius(2);
+        is.setColor(Color.BLUEVIOLET);
+        is.setOffsetX(2);
+        is.setOffsetY(0.8);
+        is.setChoke(0.2);
+        is.setBlurType(BlurType.TWO_PASS_BOX);
+        Reflection r=new Reflection();
+        r.setTopOffset(1);
+        r.setTopOpacity(1);
+        r.setBottomOpacity(0.5);
+        
+        ds.setInput(bl);
+        welcomeLabel.setEffect(ds);
+        r.setInput(is);
+        qLabel.setEffect(r);
+        
+        //add test warning TODO: generate warning on initiate
+        GenWarning w1=new GenWarning("Test Warning");
+        GenWarning w2=new GenWarning("Test Warnign2");
+        notificationPane.getChildren().addAll(w1.getWarning(),w2.getWarning());
     }
-    /*public String getSearchForStudent(){
-        System.out.println(studentSearchField.getText());
-        return studentSearchField.getText();
+    //TODO
+    private void removeNotification(){
+        notificationPane.getChildren().remove(0);
     }
-    public String getSearchForSubject(){
-        return subjectSearchField.getText();
-    }*/
 }

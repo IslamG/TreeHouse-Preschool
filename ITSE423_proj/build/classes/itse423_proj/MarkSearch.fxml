@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="488.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="488.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView layoutX="56.0" layoutY="62.0" prefHeight="354.0" prefWidth="376.0">
+      <Label layoutX="56.0" layoutY="29.0" text="Subject" />
+      <Label fx:id="teacherNameField" layoutX="313.0" layoutY="29.0" />
+      <Label fx:id="subjectNameField" layoutX="110.0" layoutY="29.0" />
+      <Button layoutX="180.0" layoutY="428.0" mnemonicParsing="false" onAction="#getChart" style="-fx-border-radius: 5; -fx-background-radius: 5;" text="View Statistics">
+         <font>
+            <Font name="Times New Roman" size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="266.0" layoutY="29.0" text="Prof." />
+      <TableView fx:id="markTable" layoutX="56.0" layoutY="62.0" prefHeight="354.0" prefWidth="376.0" style="-fx-background-color: lightblue;" styleClass="table-row-cell">
         <columns>
-          <TableColumn fx:id="stdNo" prefWidth="64.0" text="NO." />
-          <TableColumn fx:id="stdName" prefWidth="224.0" text="Std. Name" />
-            <TableColumn fx:id="stdGrade" prefWidth="87.0" text="Final Grade" />
+          <TableColumn fx:id="stdNo" editable="false" prefWidth="64.0" text="NO." />
+          <TableColumn fx:id="stdName" editable="false" prefWidth="224.0" text="Std. Name" />
+          <TableColumn fx:id="stdGrade" editable="false" prefWidth="87.0"  text="Final Grade" />
         </columns>
       </TableView>
-      <Label layoutX="56.0" layoutY="29.0" text="Subject" />
-      <Label layoutX="266.0" layoutY="29.0" text="Prof." />
-      <Label fx:id="subjectNameField" layoutX="110.0" layoutY="29.0" />
-      <Label fx:id="teacherNameField" layoutX="313.0" layoutY="29.0" />
+      <Pane fx:id="overlay" prefHeight="470.0" prefWidth="488.0" style="-fx-background-color: pink;" managed="false" />
    </children>
 </AnchorPane>
