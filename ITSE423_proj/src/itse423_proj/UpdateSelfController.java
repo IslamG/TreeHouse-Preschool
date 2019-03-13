@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package itse423_proj;
-
+//Islam Omar Ghretlli
+//215185139
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -17,15 +18,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -86,7 +89,32 @@ public class UpdateSelfController implements Initializable {
     private static Connection conn;
     private static ResultSet rs;
     private static PreparedStatement ps;
-    private Alert alert=new Alert(AlertType.ERROR);
+    private Alert alert=new Alert(Alert.AlertType.ERROR);
+    private String mHead, mCont;
+    
+    private void showAlert(int i){
+        String url;
+        alert.setHeaderText(mHead);
+        alert.setContentText(mCont);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                       getClass().getResource("alertStyles.css").toExternalForm());
+        if(i==1){
+            alert.setTitle("ERROR");
+            dialogPane.getStyleClass().add("error");
+            url="cross.png";
+        }
+        else{
+            alert.setTitle("SUCCESS");
+            dialogPane.getStyleClass().add("success");
+            url="check.png";
+        }
+        ImageView img=new ImageView(new Image(this.getClass().getResourceAsStream(url)));
+        img.setFitHeight(50);
+        img.setFitWidth(50);
+        dialogPane.setGraphic(img);
+        alert.showAndWait();
+    }
    
     
     /**
@@ -105,10 +133,9 @@ public class UpdateSelfController implements Initializable {
     private void saveNewName(ActionEvent event) throws SQLException {
         //check if input password matches logged in user password
         if (!confirmPassField.getText().equals(userPassword)){
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Password mismatch");
-            alert.setContentText("check field and try again");
-            alert.showAndWait();
+            mHead="Password mismatch";
+            mCont="check field and try again";
+            showAlert(1);
         }
         else{
             //set a user name in database
@@ -116,12 +143,16 @@ public class UpdateSelfController implements Initializable {
             ps=conn.prepareStatement(sql);
             ps.setString(1,newNameField.getText());
             ps.setString(2,userName);
-            ps.execute();
-            alert.setAlertType(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("SUCCESS");
-            alert.setHeaderText("Information updated successfully");
-            alert.setContentText("Search again to view changes");
-            alert.showAndWait();
+            if(ps.executeUpdate()>0){
+                mHead="Information updated successfully";
+                mCont="Search again to view changes";
+                showAlert(2);
+            }
+            else{
+                mHead="Something went wrong";
+                mCont="data not updated";
+                showAlert(1);
+            }
             dbc.disconnect();
         }
         
@@ -131,19 +162,17 @@ public class UpdateSelfController implements Initializable {
     private void savePassword(ActionEvent event) throws SQLException {
         //confirm input password match
         if (!oldPasswordField.getText().equals(userPassword)){
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Incorrect password");
-            alert.setContentText("check field and try again");
-            alert.showAndWait();
+            mHead="Incorrect password";
+            mCont="check field and try again";
+            showAlert(1);
             oldPasswordField.setStyle("-fx-border-color:red;");
         }
         //confirm both fields have new password correctly
         else if(!newPasswordField.getText().equals(confirmNewPassword.getText())){
             oldPasswordField.setStyle("-fx-border-color:none;");
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Password mismatch");
-            alert.setContentText("Both fields must contain same value");
-            alert.showAndWait();
+            mHead="Password mismatch";
+            mCont="Both fields must contain same value";
+            showAlert(1);
             newPasswordField.setStyle("-fx-border-color:red;");
             confirmNewPassword.setStyle("-fx-border-color:red;");
         }
@@ -156,12 +185,17 @@ public class UpdateSelfController implements Initializable {
             ps=conn.prepareStatement(sql);
             ps.setString(1,newPasswordField.getText());
             ps.setString(2,userName);
-            ps.execute();
-            alert.setAlertType(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("SUCCESS");
-            alert.setHeaderText("Information updated successfully");
-            alert.setContentText("Search again to view changes");
-            alert.showAndWait();
+            if(ps.executeUpdate()>0){
+                mHead="Information updated successfully";
+                mCont="Search again to view changes";
+                showAlert(2);
+            }
+            else{
+                mHead="Something went wrong";
+                mCont="Data not updated";
+                showAlert(1);
+            }
+            
             dbc.disconnect();
         }
     }
@@ -209,18 +243,15 @@ public class UpdateSelfController implements Initializable {
             sql+="where fname=?";
             ps= conn.prepareStatement(sql);
             ps.setString(1, userName);
-            if(ps.execute()){
-                alert.setTitle("ERROR");
-                alert.setHeaderText("Something Went Wrong");
-                alert.setContentText("Check name and try again");
-                alert.showAndWait();
+            if(ps.executeUpdate()<1){
+                mHead="Something Went Wrong";
+                mCont="Check name and try again";
+                showAlert(1);
             }
             else{
-               alert.setAlertType(Alert.AlertType.CONFIRMATION);
-               alert.setTitle("SUCCESS");
-               alert.setHeaderText("Information updated successfully");
-               alert.setContentText("Login again to view changes");
-               alert.showAndWait();
+               mHead="Information updated successfully";
+               mCont="Login again to view changes";
+               showAlert(2);
             }
             dbc.disconnect();    
      }

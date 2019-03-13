@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package itse423_proj;
-
+//Islam Omar Ghretlli
+//215185139
 import com.mysql.jdbc.Connection;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -33,6 +34,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -147,7 +150,8 @@ public class LoginScreenController implements Initializable {
                 {
                     AdminPageController apc=new AdminPageController();
                     apc.initialize(name, password);
-                    root1= FXMLLoader.load(getClass().getResource(rs.getString("job").equalsIgnoreCase("admin") ? "AdminPage.fxml" : "TeacherPage.fxml"));
+                    root1= FXMLLoader.load(getClass().getResource(
+                            rs.getString("job").equalsIgnoreCase("employee") ? "HomeEmployee.fxml" : "AdminPage.fxml"));
                 }
                 
                 Scene scene = new Scene(root1);
@@ -157,24 +161,19 @@ public class LoginScreenController implements Initializable {
                 Stage stage=new Stage();
                 stage.setScene(scene);
                 //add event listener onto newly loaded scene (same as mosue active and mouse inactive)
-                /*scene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {//setOnMousePressed(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        Scene scene = content.getScene();
-                        Image image = new Image(AdminPageController.class.getResourceAsStream("pencil2.png"));  
-                        scene.setCursor(new ImageCursor(image));
-                        System.out.println("Hi "+image);
-                    }
-                    });
-                scene.addEventFilter(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        Scene scene = content.getScene();
-                        Image image = new Image(AdminPageController.class.getResourceAsStream("pencil.png"));  
-                        scene.setCursor(new ImageCursor(image));
-                        System.out.println("Bye "+image);
-                    }
-                    });*/
+                scene.addEventFilter(MouseEvent.MOUSE_PRESSED, (MouseEvent event1) -> {
+                    Scene scene1 = content.getScene();
+                    Image image1 = new Image(AdminPageController.class.getResourceAsStream("pencil2.png"));
+                    scene1.setCursor(new ImageCursor(image1));
+                    //System.out.println("Hi " + image1);
+                } 
+                );
+                scene.addEventFilter(MouseEvent.MOUSE_RELEASED, (MouseEvent event1) -> {
+                    Scene scene1 = content.getScene();
+                    Image image1 = new Image(AdminPageController.class.getResourceAsStream("pencil.png"));
+                    scene1.setCursor(new ImageCursor(image1));
+                    //System.out.println("Bye " + image1);
+                });
                 stage.show();
                 Node source = (Node) event.getSource();
                 Stage stage2 = (Stage) source.getScene().getWindow();
@@ -188,46 +187,33 @@ public class LoginScreenController implements Initializable {
         }
 
 }
-    //private boolean isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
+    private boolean isOn=Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);;
     @FXML
     private void removeMsg(javafx.scene.input.KeyEvent event){
         if (!(errorMsg.getText().equals(""))){
             errorMsg.setText("");
         }
-        boolean isOn;
         String image;
         String m="CAPSLOCK is on, password is case sensitive\n";
-        isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
-        System.out.println(Toolkit.getDefaultToolkit().getLockingKeyState(20)+" "+isOn);
-            if(event.getCode().toString().equals("CAPS")){
-                //isOn = !isOn;
+        if(event.getCode().toString().equals("CAPS"))
+            isOn=!isOn;
+        //System.out.println(Toolkit.getDefaultToolkit().getLockingKeyState(20)+" "+isOn);
+            if(isOn){
                 capsMsg.setText(m);
                 image = LoginScreenController.class.getResource("capsOn2.png").toExternalForm();
                 lockImg.setStyle("-fx-background-image:url('"+image+"')");
             }
-            else if(isOn){
+            else{
                 capsMsg.setText("");
                 image = LoginScreenController.class.getResource("capsOff.png").toExternalForm();
                 lockImg.setStyle("-fx-background-image:url('"+image+"')");
         }
     }
-    
-    private void capsCheck(javafx.scene.input.KeyEvent event){
-        boolean isOn;
-        String image;
-        String m="CAPSLOCK is on, password is case sensitive\n";
-        isOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
-            if(event.getCode().toString().equals("CAPS")){
-                isOn = !isOn;
-                capsMsg.setText(m);
-                image = LoginScreenController.class.getResource("Unlock.ico").toExternalForm();
-                lockImg.setStyle("-fx-background-image:url('"+image+"')");
-            }
-        else{
-            capsMsg.setText("");
-            
-        }
-            
+    @FXML
+    private void close(MouseEvent event){
+        ImageView img=(ImageView)event.getTarget();
+        Stage stage=(Stage)img.getScene().getWindow();
+        stage.close();
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {

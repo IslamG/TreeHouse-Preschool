@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="478.0" prefWidth="472.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="root" spacing="15.0" styleClass="utilityBackground" stylesheets="@generalStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="478.0" prefWidth="472.0">
+      <HBox layoutX="49.0" layoutY="39.0" spacing="20.0">
          <children>
-            <Label layoutX="49.0" layoutY="39.0" text="Subject ID" />
-            <Label fx:id="subjectIdField" layoutX="127.0" layoutY="39.0" text="######" />
-            <TableView layoutX="42.0" layoutY="64.0" prefHeight="341.0" prefWidth="379.0">
-              <columns>
-                <TableColumn prefWidth="42.0" text="No." />
-                <TableColumn prefWidth="108.0" text="Std name" />
-                  <TableColumn prefWidth="48.0" text="Mid 1" />
-                  <TableColumn prefWidth="53.0" text="Mid 2" />
-                  <TableColumn prefWidth="60.0" text="Final" />
-                  <TableColumn prefWidth="67.0" text="Total" />
-              </columns>
-            </TableView>
-            <Button layoutX="301.0" layoutY="423.0" mnemonicParsing="false" text="Save" />
-            <Button layoutX="363.0" layoutY="423.0" mnemonicParsing="false" text="Cancel" />
+            <Label layoutX="49.0" layoutY="39.0" styleClass="utilityLabel" text="Subject ID" />
+            <Label fx:id="subjectIdField" layoutX="127.0" layoutY="39.0" styleClass="utilityLabel" text="######" />
          </children>
-      </Pane>
+      </HBox>
+      <TableView fx:id="markTable" editable="true" layoutX="42.0" layoutY="64.0">
+        <columns>
+          <TableColumn fx:id="numCol" editable="false" maxWidth="1000.0" prefWidth="42.0" text="No." />
+          <TableColumn fx:id="nameCol" editable="false" prefWidth="108.0" text="Std name" />
+            <TableColumn fx:id="mid1Col" maxWidth="2000.0" prefWidth="48.0" text="Mid 1" />
+            <TableColumn fx:id="mid2Col" maxWidth="2000.0" prefWidth="53.0" text="Mid 2" />
+            <TableColumn fx:id="finalCol" maxWidth="3000.0" prefWidth="60.0" text="Final" />
+            <TableColumn fx:id="totalCol" editable="false" maxWidth="3000.0" prefWidth="67.0" text="Total" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <HBox alignment="TOP_RIGHT" layoutX="301.0" layoutY="423.0" spacing="20.0">
+         <children>
+            <Button fx:id="saveButton" layoutX="301.0" layoutY="423.0" mnemonicParsing="false" onAction="#save" styleClass="utilityButton" text="Save" />
+            <Button fx:id="cancelButton" layoutX="363.0" layoutY="423.0" mnemonicParsing="false" onAction="#cancel" styleClass="utilityButton" text="Cancel" />
+         </children>
+      </HBox>
    </children>
-</AnchorPane>
+   <padding>
+      <Insets bottom="15.0" left="30.0" right="30.0" top="15.0" />
+   </padding>
+</VBox>

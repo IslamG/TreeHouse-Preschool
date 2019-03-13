@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
@@ -11,194 +14,231 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="501.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.AdminPageController">
-    <children>
-      <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <right>
-            <VBox prefHeight="349.0" style="-fx-background-color: #ffccff;" BorderPane.alignment="CENTER">
+<BorderPane fx:id="borderPane" prefHeight="550.0" prefWidth="700.0" stylesheets="@generalStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.AdminPageController">
+   <right>
+      <VBox prefHeight="349.0" style="-fx-background-color: linear-gradient( #ffccff 70%,lightblue 100%);" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="200.0">
                <children>
-                  <Pane prefHeight="200.0">
-                     <children>
-                        <ImageView fx:id="adminImage" fitHeight="90.0" fitWidth="90.0" layoutX="81.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="titleLabel" layoutX="109.0" layoutY="142.0" text="Admin" textFill="#61125b">
-                           <font>
-                              <Font name="Franklin Gothic Heavy Italic" size="14.0" />
-                           </font></Label>
-                     </children>
-                  </Pane>
-                  <Accordion prefHeight="188.0" prefWidth="252.0">
-                     <panes>
-                        <TitledPane animated="false" prefHeight="290.0" stylesheets="@titledPaneStyle.css" text="Manage Personal">
-                           <content>
-                              <HBox alignment="CENTER" prefHeight="100.0" spacing="5.0">
-                                 <children>
-                                    <Button fx:id="updateInfo" mnemonicParsing="false" onAction="#manageSelf" text="Update Profile">
-                                       <font>
-                                          <Font name="Times New Roman Bold" size="12.0" />
-                                       </font></Button>
-                                    <Button fx:id="changePassword" mnemonicParsing="false" onAction="#manageSelf" text="Change Password">
-                                        <font>
-                                          <Font name="Times New Roman Bold" size="12.0" />
-                                       </font></Button>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-                                 </padding>
-                              </HBox>
-                           </content>
-                           <font>
-                              <Font name="Times New Roman Bold" size="15.0" />
-                           </font>
-                        </TitledPane>
-                        <TitledPane animated="false" text="Manage Teaching Staff">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <HBox alignment="CENTER" prefHeight="39.0" prefWidth="253.0" spacing="20.0">
-                                       <children>
-                                          <Button fx:id="editTeacher" mnemonicParsing="false" onAction="#manageTeacher" text="Edit Teacher">
-                                             <font>
-                                                <Font name="Times New Roman Bold" size="12.0" />
-                                             </font></Button>
-                                          <Button fx:id="removeTeacher" mnemonicParsing="false" onAction="#manageTeacher" text="Remove Teacher">
-                                             <font>
-                                                <Font name="Times New Roman Bold" size="12.0" />
-                                             </font></Button>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-                                       </padding>
-                                    </HBox>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                           <font>
-                              <Font name="Times New Roman Bold" size="15.0" />
-                           </font>
-                        </TitledPane>
-                        <TitledPane animated="false" onContextMenuRequested="#manageEmployee" prefHeight="290.0" text="Manage Employees">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <HBox alignment="CENTER" prefHeight="39.0" prefWidth="253.0" spacing="40.0">
-                                       <children>
-                                          <Button fx:id="addUser" mnemonicParsing="false" onAction="#manageEmployee" text="Add User" />
-                                          <Button fx:id="removeUser" mnemonicParsing="false" onAction="#manageEmployee" text="Delete User" />
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-                                       </padding>
-                                    </HBox>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                           <font>
-                              <Font name="Times New Roman Bold" size="15.0" />
-                           </font>
-                        </TitledPane>
-                        <TitledPane animated="false" layoutX="10.0" layoutY="60.0" prefHeight="290.0" text="Manage Students">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <HBox alignment="CENTER" prefHeight="42.0" prefWidth="253.0" spacing="5.0">
-                                       <children>
-                                          <TextField fx:id="studentSearchField" prefHeight="25.0" prefWidth="126.0" />
-                                          <ComboBox fx:id="studentChoice" onAction="#searchBy" prefHeight="25.0" promptText="Select search method">
-                                            <items>
-                                                <FXCollections fx:factory="observableArrayList">
-                                                    <String fx:value="Search by Name" />
-                                                    <String fx:value="Search by ID" />
-                                                </FXCollections>
-                                            </items>
-                                        </ComboBox>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-                                       </padding>
-                                    </HBox>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                           <font>
-                              <Font name="Times New Roman Bold" size="15.0" />
-                           </font>
-                        </TitledPane>
-                        <TitledPane animated="false" layoutX="10.0" layoutY="85.0" prefHeight="290.0" text="Manage Subjects">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <HBox alignment="CENTER" layoutX="-1.0" layoutY="-2.0" prefHeight="42.0" prefWidth="253.0" spacing="5.0">
-                                       <children>
-                                          <TextField fx:id="subjectSearchField" prefHeight="25.0" prefWidth="126.0" />
-                                          <ComboBox fx:id="subjectChoice" onAction="#searchBy" prefHeight="25.0" promptText="Select search method">
-                                            <items>
-                                                <FXCollections fx:factory="observableArrayList">
-                                                    <String fx:value="Teacher" />
-                                                    <String fx:value="Subject Code" />
-                                                </FXCollections>
-                                            </items>
-                                        </ComboBox>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-                                       </padding>
-                                    </HBox>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                           <font>
-                              <Font name="Times New Roman Bold" size="15.0" />
-                           </font>
-                        </TitledPane>
-                     </panes>
-                  </Accordion>
+                  <ImageView fx:id="adminImage" fitHeight="90.0" fitWidth="90.0" layoutX="81.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="titleLabel" layoutX="109.0" layoutY="142.0" textFill="#61125b">
+                     <font>
+                        <Font name="Franklin Gothic Heavy Italic" size="14.0" />
+                     </font>
+                  </Label>
                </children>
-            </VBox>
-         </right>
-         <top>
-            <VBox>
-               <children>
-                  <HBox fx:id="header" style="-fx-background-color: #330033;" BorderPane.alignment="CENTER">
-                     <children>
-                        <VBox alignment="CENTER">
+            </Pane>
+            <Accordion id="aroundAside" fx:id="sideAccordion" prefWidth="252.0" style="-fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+               <panes>
+                  <TitledPane fx:id="mPersonal" animated="false" contentDisplay="CENTER" graphicTextGap="100.0" style="-fx-background-color: null;" styleClass="Aside" text="Manage Personal">
+                     <content>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="asideVbox">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: #ffffff; -fx-background-radius: 10;" text="LogOut" textFill="#330033">
+                              <Button fx:id="updateInfo" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#manageSelf" style="-fx-font-family: bellMT; -fx-font-size: 14px; -fx-text-fill: indigo; -fx-font-weight: bold;" styleClass="innerAside" text="Update Profile" VBox.vgrow="ALWAYS">
                                  <font>
-                                    <Font name="Arial Bold" size="12.0" />
+                                    <Font name="Times New Roman Bold" size="12.0" />
                                  </font>
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@schoolmodule3.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="changePassword" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#manageSelf" style="-fx-font-family: bellMT; -fx-font-size: 14px; -fx-text-fill: indigo; -fx-font-weight:bold;" styleClass="innerAside" text="Change Password" VBox.vgrow="ALWAYS">
+                                  <font>
+                                    <Font name="Times New Roman Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Count-tool-icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </Button>
                            </children>
                         </VBox>
-                        <Region prefHeight="0.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <ImageView fitHeight="50.0" fitWidth="660.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@built-icon.png" />
-                           </image>
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                        </ImageView>
-                     </children>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </HBox>
-                  <TitledPane expanded="false">
-                     <content>
-                        <VBox fx:id="notificationPane" alignment="CENTER" spacing="2.0" style="-fx-background-color: orange;" />
                      </content>
-                  </TitledPane>
-               </children>
-            </VBox>
-         </top>
-         <center>
-            <VBox fx:id="content" alignment="CENTER" spacing="50.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="142.0" layoutY="149.0" text="Welcome" textFill="#330033">
                      <font>
-                        <Font name="Times New Roman Bold" size="42.0" />
+                        <Font name="Times New Roman Bold" size="15.0" />
                      </font>
-                  </Label>
+                  </TitledPane>
+                  <TitledPane fx:id="mTeach" animated="false" contentDisplay="CENTER" graphicTextGap="100.0" styleClass="Aside" text="Manage Teaching Staff">
+                     <content>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="asideVbox" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="editTeacher" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#manageTeacher" style="-fx-font-family: bellMT; -fx-font-size: 14px; -fx-text-fill: indigo;-fx-font-weight:bold;" styleClass="innerAside" text="Edit Teacher" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@school-management-system-demo3.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="removeTeacher" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#manageTeacher" style="-fx-font-family: bellMT; -fx-font-size: 14px; -fx-text-fill: indigo;-fx-font-weight:bold;" styleClass="innerAside" text="Remove Teacher" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="12.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Tools-1-icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </content>
+                     <font>
+                        <Font name="Times New Roman Bold" size="15.0" />
+                     </font>
+                  </TitledPane>
+                  <TitledPane fx:id="mEmp" animated="false" contentDisplay="CENTER" graphicTextGap="100.0" onContextMenuRequested="#manageEmployee" styleClass="Aside" text="Manage Employees">
+                     <content>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="asideVbox" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="removeUser" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#manageEmployee" style="-fx-font-family: bellMT; -fx-font-size: 14px; -fx-text-fill: indigo;-fx-font-weight:bold;" styleClass="innerAside" text="Delete User" VBox.vgrow="ALWAYS">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@schoolmodule4.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <Button fx:id="addUser" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#manageEmployee" style="-fx-font-family: bellMT; -fx-font-size: 14px; -fx-text-fill: indigo;-fx-font-weight:bold;" styleClass="innerAside" text="Add User" VBox.vgrow="ALWAYS">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@schoolmodule1.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                           </children>
+                        </VBox>
+                     </content>
+                     <font>
+                        <Font name="Times New Roman Bold" size="15.0" />
+                     </font>
+                  </TitledPane>
+                  <TitledPane fx:id="mStd" animated="false" contentDisplay="CENTER" graphicTextGap="100.0" styleClass="Aside" text="Manage Students">
+                     <content>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="asideVbox">
+                           <children>
+                              <MenuButton fx:id="studentChoice" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-family: bellMT; -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: indigo;" styleClass="innerAside" text="Select search method" VBox.vgrow="ALWAYS">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" styleClass="Aside" text="Search by Name" />
+                                  <MenuItem mnemonicParsing="false" text="Search by ID" />
+                                </items>
+                              </MenuButton>
+                              <TextField fx:id="studentSearchField" maxWidth="1.7976931348623157E308" style="-fx-font-family: bellMT; -fx-font-size: 14px; -fx-text-fill: indigo;" styleClass="innerAside" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                     </content>
+                     <font>
+                        <Font name="Times New Roman Bold" size="15.0" />
+                     </font>
+                  </TitledPane>
+                  <TitledPane fx:id="mSub" animated="false" contentDisplay="CENTER" graphicTextGap="100.0" styleClass="Aside" text="Manage Subjects">
+                     <content>
+                        <VBox alignment="CENTER" spacing="10.0" styleClass="asideVbox">
+                           <children>
+                              <MenuButton fx:id="subjectChoice" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-font-family: bellMT; -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: indigo;" styleClass="innerAside" text="Select Search Method" VBox.vgrow="ALWAYS">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" styleClass="Aside" text="Teacher Name" />
+                                  <MenuItem mnemonicParsing="false" text="Subject Code" />
+                                </items>
+                              </MenuButton>
+                              <TextField fx:id="subjectSearchField" maxWidth="1.7976931348623157E308" style="-fx-font-family: bellMT; -fx-font-size: 14px; -fx-text-fill: indigo;-fx-font-weight:bold;" styleClass="innerAside" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                     </content>
+                     <font>
+                        <Font name="Times New Roman Bold" size="15.0" />
+                     </font>
+                  </TitledPane>
+               </panes>
+            </Accordion>
+         </children>
+      </VBox>
+   </right>
+   <top>
+      <VBox>
+         <children>
+            <HBox fx:id="header" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Button id="logBtn" mnemonicParsing="false" onAction="#logOut" text="LogOut" textFill="#330033">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <Region prefHeight="0.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <ImageView fitHeight="50.0" fitWidth="660.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@built-icon.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <TitledPane fx:id="warningPane" expanded="false" styleClass="utilityLabel">
+               <content>
+                  <VBox fx:id="notificationPane" alignment="CENTER" spacing="2.0" style="-fx-background-color: orange;" />
+               </content>
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@General_Warning_Symbol_large.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </TitledPane>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+         <children>
+            <Pane fx:id="aniPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+            <VBox fx:id="content" alignment="CENTER" layoutX="81.0" layoutY="168.0" spacing="50.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="BASELINE_CENTER" spacing="10.0">
+                     <children>
+                        <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="142.0" layoutY="149.0" text="Welcome" textFill="#330033">
+                           <font>
+                              <Font name="Times New Roman Bold" size="42.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="nameLabel">
+                           <font>
+                              <Font name="Kunstler Script" size="35.0" />
+                           </font>
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop color="#320140" />
+                                    <Stop color="#6a0090" offset="1.0" />
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
+                        </Label>
+                     </children>
+                  </HBox>
                   <Label fx:id="qLabel" layoutX="90.0" layoutY="233.0" text="What would you like to do?">
                      <font>
                         <Font name="Times New Roman Bold" size="23.0" />
@@ -206,7 +246,7 @@
                   </Label>
                </children>
             </VBox>
-         </center>
-      </BorderPane>
-   </children>
-</AnchorPane>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

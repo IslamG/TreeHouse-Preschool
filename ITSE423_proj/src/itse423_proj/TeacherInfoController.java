@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package itse423_proj;
-
+//Islam Omar Ghretlli
+//215185139
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -20,12 +21,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -53,8 +57,34 @@ public class TeacherInfoController implements Initializable {
     private ListView<String> currentInfoList;
     @FXML
     private PasswordField passConfrimField;
-    private Alert alert=new Alert(Alert.AlertType.ERROR);
     private static String name;
+    private Alert alert=new Alert(Alert.AlertType.ERROR);
+    private String mHead, mCont;
+    
+    private void showAlert(int i){
+        String url;
+        alert.setHeaderText(mHead);
+        alert.setContentText(mCont);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                       getClass().getResource("alertStyles.css").toExternalForm());
+        if(i==1){
+            alert.setTitle("ERROR");
+            dialogPane.getStyleClass().add("error");
+            url="cross.png";
+        }
+        else{
+            alert.setTitle("SUCCESS");
+            dialogPane.getStyleClass().add("success");
+            url="check.png";
+        }
+        ImageView img=new ImageView(new Image(this.getClass().getResourceAsStream(url)));
+        img.setFitHeight(50);
+        img.setFitWidth(50);
+        dialogPane.setGraphic(img);
+        alert.showAndWait();
+    }
+    
     /**
      * Initializes the controller class.
      */
@@ -68,9 +98,9 @@ public class TeacherInfoController implements Initializable {
         name=searchField.getText();
         //if search field blank
         if (name.equals("")){
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Field Cannot be empty");
-            alert.showAndWait();
+            mHead="Field Cannot be empty";
+            mCont="Type in teacher name and search again";
+            showAlert(1);
             searchField.setStyle("-fx-border-color:red;");
         }
         else{
@@ -82,10 +112,9 @@ public class TeacherInfoController implements Initializable {
             pr.setString(1, name);
             ResultSet rs=pr.executeQuery();
             if (!rs.next()){
-                alert.setTitle("ERROR");
-                alert.setHeaderText("Something Went Wrong");
-                alert.setContentText("Check name and try again");
-                alert.showAndWait();
+                mHead="Something went wrong";
+                mCont="Check name and try again";
+                showAlert(1);
             }
             else{
                 //fill remove teacher window with data
@@ -112,9 +141,9 @@ public class TeacherInfoController implements Initializable {
     private void saveNewInfo() throws SQLException {
         name=searchField.getText();
         if (name.equals("")){
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Field Cannot be empty");
-            alert.showAndWait();
+            mHead="Field Cannot be empty";
+            mCont="Type in teacher name and search again";
+            showAlert(1);
             searchField.setStyle("-fx-border-color:red;");
         }
         else{
@@ -139,7 +168,6 @@ public class TeacherInfoController implements Initializable {
             }
             if (hireDatePicker.getValue()!=null){
                 sql+="hiring_date= '"+Date.valueOf(hireDatePicker.getValue())+"', ";
-                
             }
             if(departmentCombo.getValue()!=null&&departmentCombo.getValue().equals("Arts")){
                 sql+="dep='Arts',";
@@ -159,18 +187,15 @@ public class TeacherInfoController implements Initializable {
             sql+="where fname=?";
             PreparedStatement pr= conn.prepareStatement(sql);
             pr.setString(1, name);
-            if(pr.execute()){
-                alert.setTitle("ERROR");
-                alert.setHeaderText("Something Went Wrong");
-                alert.setContentText("Check name and try again");
-                alert.showAndWait();
+            if(pr.executeUpdate()>1){
+                mHead="Something went wrong";
+                mCont="Check name and try again";
+                showAlert(1);
             }
             else{
-               alert.setAlertType(Alert.AlertType.CONFIRMATION);
-               alert.setTitle("SUCCESS");
-               alert.setHeaderText("Information updated successfully");
-               alert.setContentText("Search again to view changes");
-               alert.showAndWait();
+               mHead="Information updated successfully";
+               mCont="Search again to view changes";
+               showAlert(2);
             }
             dbc.disconnect();
         }
@@ -191,9 +216,9 @@ public class TeacherInfoController implements Initializable {
     private void confirmClear() throws SQLException {
         name=searchField.getText();
         if (name.equals("")){
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Field Cannot be empty");
-            alert.showAndWait();
+            mHead="Field Cannot be empty";
+            mCont="Type in teacher name and search again";
+            showAlert(1);
             searchField.setStyle("-fx-border-color:red;");
         }
         else {
@@ -203,24 +228,26 @@ public class TeacherInfoController implements Initializable {
             Connection conn=(Connection)dbc.connect();
             AdminPageController apc=new AdminPageController();
             String userPassword=apc.userPassword;
-            if (password.equals(userPassword))
+            if (!password.equals(userPassword))
                 {
-                Alert alert= new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR");
-                alert.setHeaderText ("Something went wrong");
-                alert.setContentText("Check your password and try again");
-                alert.showAndWait();
+                mHead="Something went wrong";
+                mCont="Check your passowrd and try again";
+                showAlert(1);
              }
             else{
                String sql="update user set lname=null,sname=null,addres=null,hiring_date=null,ssn=null,mname=null,dep=null,gender='male' where fname=?";
                PreparedStatement ps=conn.prepareStatement(sql);
                ps.setString(1, name);
-               ps.execute();
-               alert.setAlertType(Alert.AlertType.CONFIRMATION);
-               alert.setTitle("SUCCESS");
-               alert.setHeaderText("Information cleared successfully");
-               alert.setContentText("Search again to view changes");
-               alert.showAndWait();
+               if (ps.executeUpdate()>0){
+                    mHead="Information cleared successfully";
+                    mCont="Search again to view changes";
+                    showAlert(2);
+               }
+               else{
+                mHead="Something went wrong";
+                mCont="Data not updated";
+                showAlert(1);
+             }
             }
             dbc.disconnect();
         } 

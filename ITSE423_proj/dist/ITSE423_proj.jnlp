@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ITSE423_proj.jar" size="1338203" download="eager" />
-    <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="827921" download="eager" />
+    <jar href="ITSE423_proj.jar" size="2648680" download="eager" />
+    <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="ITSE423_proj" >
     <param name="requiredFXVersion" value="8.0+"/>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="502.0" prefWidth="735.0" style="-fx-background-color: #ffe6ff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_project2.HomeEmployeeController">
+   <children>
+      <VBox alignment="CENTER" layoutX="525.0" prefHeight="470.0" prefWidth="197.0" spacing="10.0" style="-fx-background-color: #cce6ff; -fx-border-radius: 5%; -fx-background-radius: 5%;">
+         <children>
+            <ImageView fitHeight="172.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Teacher-female-icon.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="nameviwe" alignment="CENTER" prefHeight="25.0" prefWidth="172.0" text="Name" textFill="#1318a1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#userinfo" prefHeight="25.0" prefWidth="183.0" style="-fx-background-color: #0066ff;" text="User Info" textFill="AQUA">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Button>
+            <Accordion id="aroundAside" fx:id="base" style="-fx-background-color: #000;" stylesheets="@generalStyle.css">
+               <panes>
+                  <TitledPane alignment="TOP_LEFT" animated="false" graphicTextGap="9.0" prefHeight="130.0" styleClass="Aside" text="Student" textAlignment="CENTER">
+                     <content>
+                        <AnchorPane maxHeight="102.0" minHeight="0.0" minWidth="0.0" prefHeight="93.0" prefWidth="195.0">
+                           <children>
+                              <Button fx:id="addstudent" layoutX="-1.0" mnemonicParsing="false" onAction="#studentManager" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #ffcce6;" text="add" textFill="#0000b3">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Button>
+                              <Button fx:id="editstudent" layoutY="61.0" mnemonicParsing="false" onAction="#studentManager" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: #ffcce6;" text="edit" textFill="#ff471a">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Button>
+                              <Button fx:id="searchstudent" layoutY="30.0" mnemonicParsing="false" onAction="#studentManager" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #ffcce6;" text="search" textFill="#ff5050">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images5NA3WNBL.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </TitledPane>
+                  <TitledPane animated="false" prefHeight="130.0" prefWidth="197.0" styleClass="Aside" text="Courses">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="185.0">
+                           <children>
+                              <Button fx:id="addcourse" layoutX="-1.0" layoutY="-6.0" mnemonicParsing="false" onAction="#coursesManager" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #ffcce6;" text="Add" textFill="#0000b3">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Button>
+                              <Button fx:id="showcourse" layoutX="-1.0" layoutY="26.0" mnemonicParsing="false" onAction="#coursesManager" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #ffcce6;" text="Show" textFill="#cc0099">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" prefHeight="130.0" prefWidth="197.0" styleClass="Aside" text="Classes">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="addclass" layoutX="-5.0" layoutY="2.0" mnemonicParsing="false" onAction="#classesManager" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: #ffcce6;" text="Add" textFill="#0000b3">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Button>
+                              <Button fx:id="showclass" layoutX="-6.0" layoutY="33.0" mnemonicParsing="false" onAction="#classesManager" prefHeight="30.0" prefWidth="206.0" style="-fx-background-color: #ffcce6;" text="Show" textFill="#cc0099">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" prefHeight="130.0" styleClass="Aside" text="Study Schedule">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="185.0">
+                           <children>
+                              <Button fx:id="showschedule" layoutX="-2.0" layoutY="-6.0" mnemonicParsing="false" onAction="#showSchrdule" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #ffcce6;" text="show" textFill="#cc0099">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font></Button>
+                           </children></AnchorPane>
+                     </content>
+                  </TitledPane>
+               </panes>
+            </Accordion>
+         </children>
+      </VBox>
+      <Pane fx:id="content" layoutX="25.0" layoutY="63.0" prefHeight="410.0" prefWidth="493.0" style="-fx-background-color: white; -fx-background-radius: 5%; -fx-border-radius: 5%;">
+         <children>
+            <Label layoutX="40.0" layoutY="48.0" prefHeight="96.0" prefWidth="214.0" text="Welcome " textAlignment="CENTER" textFill="#25682d">
+               <font>
+                  <Font name="Arial Black" size="27.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="176.0" fitWidth="172.0" layoutX="307.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Student-id-icon.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="msgSaved" layoutX="40.0" layoutY="330.0" prefHeight="44.0" prefWidth="167.0" textFill="RED">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="200.0" prefHeight="96.0" prefWidth="325.0" text="What you like to do!" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Black" size="23.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane layoutX="391.0" layoutY="-8.0" prefHeight="33.0" prefWidth="134.0">
+         <children>
+            <Button fx:id="exit" layoutY="7.0" mnemonicParsing="false" onAction="#clickBottonexit" prefHeight="25.0" prefWidth="38.0" style="-fx-background-color: #00ffff;" text="X" textFill="#0000b3">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="50.0" layoutY="7.0" mnemonicParsing="false" onAction="#alart" prefHeight="25.0" prefWidth="34.0" style="-fx-background-color: #00ffff;" text="A" textFill="#0000b3">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="94.0" layoutY="7.0" mnemonicParsing="false" onAction="#Home" prefHeight="25.0" prefWidth="32.0" style="-fx-background-color: #00ffff;" text="H" textFill="#0000b3">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <HBox alignment="CENTER_LEFT" layoutX="31.0" prefHeight="63.0" prefWidth="318.0" spacing="5.0">
+         <children>
+            <ImageView fitHeight="58.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
+            <Label prefHeight="44.0" prefWidth="214.0" text="Tree House Pre-School" textFill="#30d6ff">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package itse423_proj;
-
+//Islam Omar Ghretlli
+//215185139
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -18,11 +19,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.print.PrinterJob;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -54,11 +60,35 @@ public class StudentInfoController implements Initializable {
     @FXML
     private Button saveInfo;
     @FXML
-    private AnchorPane root;
+    private VBox root;
     
     private static String searchStdByName, searchStdById;
+    private Alert alert=new Alert(AlertType.ERROR);
+    private String mHead, mCont;
     
-
+    private void showAlert(int i){
+        String url;
+        alert.setHeaderText(mHead);
+        alert.setContentText(mCont);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                       getClass().getResource("alertStyles.css").toExternalForm());
+        if(i==1){
+            alert.setTitle("ERROR");
+            dialogPane.getStyleClass().add("error");
+            url="cross.png";
+        }
+        else{
+            alert.setTitle("SUCCESS");
+            dialogPane.getStyleClass().add("success");
+            url="check.png";
+        }
+        ImageView img=new ImageView(new Image(this.getClass().getResourceAsStream(url)));
+        img.setFitHeight(50);
+        img.setFitWidth(50);
+        dialogPane.setGraphic(img);
+        alert.showAndWait();
+    }
     @FXML
     void initialize(String a, String b) throws IOException{
         //initilize with search values
@@ -75,10 +105,13 @@ public class StudentInfoController implements Initializable {
             if(job != null){
             job.showPrintDialog(root.getScene().getWindow()); 
             //create a copy of the scene (so you can remove buttons from output image)
-            AnchorPane printable=root;
-            printable.getChildren().remove(printable.lookup(".button"));
+            Pane printable=new Pane();
+            printable.getChildren().addAll(root.getChildren());
+            printable.lookup(".button").setVisible(false);
             job.printPage(printable);
             job.endJob();
+            printable.lookup(".button").setVisible(true);
+            root.getChildren().addAll(printable.getChildren());
             }
     }
 
@@ -121,7 +154,7 @@ public class StudentInfoController implements Initializable {
             }
             else{
                 //display error message in place of usual children
-                root.getChildren().clear();//remove(root.lookup("#notFound"));
+                root.getChildren().clear();
                 String m="Oops something went wrong, can't find student with ";
                 if(searchStdById==null){
                     m+="name: "+searchStdByName;
@@ -130,27 +163,25 @@ public class StudentInfoController implements Initializable {
                     m+="ID: "+searchStdById;
                 }
                 Label l=new Label(m);
-                l.setId("notFound");
-                l.setAlignment(Pos.CENTER);
-                l.setTranslateY(90);
-                l.setTranslateX(20);
-                l.setStyle("-fx-font-size:15px;");
+                l.getStyleClass().addAll("utilityLabel", "errorPane");
+                VBox h=new VBox(l);
+                h.alignmentProperty().set(Pos.CENTER);
+                h.fillWidthProperty().set(true);
+                h.getStyleClass().addAll("errorBox");
+                VBox.setVgrow(h, Priority.ALWAYS);
                 searchStdById="";
                 searchStdByName="";
-                root.getChildren().add(l);
-                
+                root.getChildren().add(h);
             }
             dbc.disconnect();
         } catch (SQLException ex) {
             Logger.getLogger(StudentInfoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO
         setUp();
     }
-    
+
 }

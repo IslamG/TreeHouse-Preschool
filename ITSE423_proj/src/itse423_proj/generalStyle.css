@@ -10,8 +10,136 @@ and open the template in the editor.
 
 
 /*TODO General Style*/
-*{
-    -fx-font-family: "Times New Roman";
-    -fx-font-style: bold;
-    -fx-font-size:18px;
+#header{
+    -fx-background-color: linear-gradient(#cc00cc,#660066,#330033,#330033,#660066,#cc00cc);
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+#logBtn{
+    -fx-background-color: 
+        linear-gradient(#ffd65b, #e68400),
+        linear-gradient(#ffef84, #f2ba44),
+        linear-gradient(#ffea6a, #efaa22),
+        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),
+        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-text-fill: #654b00;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 5 10 5 10;
+}
+#warningPane> .title {
+    -fx-background-color: 
+        linear-gradient(rgba(200,20,200, 0.5),rgba(255,200,200,0.5));
+    -fx-font-family: "Helvetica";
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+}
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: rgba(0,0,0,0.3);
+}
+.Aside > .title 
+{
+    -fx-background-insets: 3, 2, 5;
+    -fx-background-radius: 15%, 45%,25%;
+    -fx-padding: 10px; 
+    -fx-background-color: 
+        linear-gradient(rgb(0,55,55), rgb(0,55,155)),/*outmost border*/
+        linear-gradient(#3366ff, #3399ff),/*2nd tier border*/
+        linear-gradient(#66ccff,#99ffff ),/*3rd tier border*/
+        linear-gradient(#009999 0%, #66ffff 50%, #ccffff 100%);/*main fill*/
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-padding: 5 10 5 10;
+}
+#aroundAside > .titled-pane {/*home sidebar accordion panes*/
+    -fx-padding: 0 0 5px 0;
+}
+.Aside> *.content{/*space underneath titled pane header*/
+    -fx-border-color: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+    -fx-border-radius: 15%;
+    -fx-border-width: 2px;
+    -fx-margin: 7px;
+    -fx-background-color: linear-gradient( rgba(255,0,200,0.1), transparent, rgba(255,0,200,0.1)); 
+    -fx-background-radius:15%;
+    /*-fx-effect: dropshadow(three-pass-box, purple, 10, 0, 0, 0);*/
+}
+.innerAside{/*buttons inside sidebar panes*/
+    -fx-background-color: radial-gradient( center 50% 50% , radius 250%, transparent, grey);
+    /*        linear-gradient( rgba(0,0,0,0.3) 10%, transparent 90%, rgba(0,0,0,0.3) 100%);*/
+    -fx-border-color: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3));
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 0.5, 2.0 , 1.5 , 2);
+}
+.utilityButton{
+    -fx-background-color:  #330033,
+        linear-gradient(rgba(1,1,1,0.3), rgba(1,1,1,0), rgba(1,1,1,0.3)),
+        linear-gradient(rgba(1,1,1,0.3), rgba(1,1,1,0), rgba(1,1,1,0.3));
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "times new roman";
+    -fx-background-radius: 5px;
+}
+.utilityLabel .text{
+    -fx-font-family: "times new roman";
+    -fx-font-size: 14px;
+    -fx-background-color: radial-gradient( center 50% 50% , radius 250%, transparent, grey),
+            linear-gradient( rgba(0,0,0,0.3) 10%, transparent 90%, rgba(0,0,0,0.3) 100%);
+    /*-fx-border-color: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3));
+    -fx-border-width: 2px;*/
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 0.5, 2.0 , 1.5 , 2);
+}
+.utilityBackground{
+    -fx-background-color: linear-gradient(rgba(138, 43, 226, 0.5) 20%,lightblue 80%, white 100%);
+}
+.utilityField{
+    -fx-background-color:  linear-gradient(to left, #ffccff,white,#ffccff);
+    -fx-border-color: grey;
+}
+.table-row-cell {  
+    -fx-base: lightblue;/*linear-gradient(grey 3%, white 7%, lightblue 90%, #FFFFFF 97%, darkgrey 100%);*/
+    -fx-text-alignment: center;
+}
+.table-view .column-header {
+    -fx-base: pink;
+}
+#logBtn2{
+    -fx-background-color: 
+        linear-gradient(black, saddlebrown),
+        linear-gradient(brown, black),
+        linear-gradient(chocolate, brown),
+        linear-gradient(green 0%, palegreen 50%, green 100%),
+        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+}
+.userInfoPane> .title .text{
+    -fx-font-family: "bell MT";
+    -fx-font-size: 18px;
+    -fx-font-weight:bold;
+    -fx-text-fill: indigo;  
+}
+.userInfoPane> .title {
+    -fx-background-color: linear-gradient(rgba(140,0,0,0.3), rgba(60,0,0,0.5)),
+                    linear-gradient(rgba(200,108,108,0.3), rgba(200,108,108,0.7)),
+                    linear-gradient(rgba(255,150,150,0.1), rgba(155,50,50,0.3)),
+                    linear-gradient(rgba(40,0,0,0.3), rgba(0,0,0,0.5)),
+                    linear-gradient(rgb(255,160,193), rgb(150,40,72)) ;  
+    -fx-padding: 7px;
+}
+.errorPane{
+    -fx-background-color: radial-gradient( center 50% 50% , radius 250%, transparent, grey),
+            linear-gradient( rgba(0,0,0,0.3) 10%, transparent 90%, rgba(0,0,0,0.3) 100%);
+    -fx-padding: 10px;
+    -fx-font-size:20px;
+    -fx-font-weight: bolder;
+    -fx-text-fill: black;
+    -fx-border-color: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.3));
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 0.5, 2.0 , 1.5 , 2);
+}
+.errorBox{
+    -fx-background-color: radial-gradient( center 50% 50% , radius 100%, rgba(255,255,255,0.7), rgba(0,0,0,0.9));
 }

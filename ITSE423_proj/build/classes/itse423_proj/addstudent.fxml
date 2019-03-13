@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="421.0" prefWidth="503.0" style="-fx-background-color: with;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_project2.HomeEmployeeController">
+   <children>
+      <TextField fx:id="studentssn" layoutX="120.0" layoutY="290.0" prefHeight="20.0" prefWidth="180.0" />
+      <Button layoutX="411.0" layoutY="330.0" mnemonicParsing="false" onAction="#cancelStudent" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: #cce6b2; -fx-background-radius: 10%; -fx-border-radius: 10%;" text="cancel" textFill="#25682d">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <RadioButton fx:id="genderm" layoutX="370.0" layoutY="147.0" mnemonicParsing="false" text="male">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="genderf" layoutX="425.0" layoutY="147.0" mnemonicParsing="false" text="female">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></RadioButton>
+      <Button layoutX="306.0" layoutY="330.0" mnemonicParsing="false" onAction="#addStudent" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: #cce6b2; -fx-background-radius: 10%; -fx-border-radius: 10%;" text="add" textFill="#25682d">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <Label layoutX="313.0" layoutY="147.0" prefHeight="19.0" prefWidth="54.0" text="Gender:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Label layoutX="30.0" layoutY="110.0" prefHeight="20.0" prefWidth="80.0" text="Mother Name">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="studentadress" layoutX="120.0" layoutY="170.0" prefHeight="20.0" prefWidth="180.0" />
+      <TextField fx:id="story" layoutX="120.0" layoutY="260.0" prefHeight="20.0" prefWidth="180.0" />
+      <Label layoutX="30.0" layoutY="230.0" prefHeight="20.0" prefWidth="80.0" text="Birth Date">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <TextField fx:id="nat" layoutX="120.0" layoutY="200.0" prefHeight="20.0" prefWidth="180.0" />
+      <Label layoutX="30.0" layoutY="260.0" prefHeight="20.0" prefWidth="80.0" text="Story Date">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label layoutX="30.0" layoutY="290.0" prefHeight="20.0" prefWidth="80.0" text="SSN">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <TextField fx:id="birth" layoutX="120.0" layoutY="230.0" prefHeight="20.0" prefWidth="180.0" />
+      <TextField fx:id="fatherphon" layoutX="120.0" layoutY="140.0" prefHeight="20.0" prefWidth="180.0" />
+      <Label layoutX="30.0" layoutY="140.0" prefHeight="20.0" prefWidth="80.0" text="Father Phone">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="30.0" layoutY="200.0" prefHeight="20.0" prefWidth="80.0" text="Nationality">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <TextField fx:id="momname" layoutX="120.0" layoutY="110.0" prefHeight="20.0" prefWidth="180.0" />
+      <TextField fx:id="studentname" layoutX="120.0" layoutY="80.0" prefHeight="20.0" prefWidth="180.0" />
+      <Label layoutX="30.0" layoutY="170.0" prefHeight="20.0" prefWidth="80.0" text="Address">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Label layoutX="30.0" layoutY="80.0" prefHeight="20.0" prefWidth="80.0" text="name:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <ImageView fitHeight="120.0" fitWidth="101.0" layoutX="347.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@boy.png" />
+         </image>
+      </ImageView>
+      <Label ellipsisString="" layoutX="30.0" layoutY="14.0" prefHeight="61.0" prefWidth="150.0" style="-fx-background-color: #dbb8ee; -fx-background-radius: 20%; -fx-border-radius: 20%;" text="Add Student: " textFill="#25682d">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="66.0" fitWidth="66.0" layoutX="30.0" layoutY="320.0" pickOnBounds="true" preserveRatio="true" rotate="-26.6">
+         <image>
+            <Image url="@bag.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="67.0" fitWidth="66.0" layoutX="334.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true" rotate="18.4">
+         <image>
+            <Image url="@Schoolbag-boy-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="61.0" fitWidth="66.0" layoutX="150.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" rotate="-36.9">
+         <image>
+            <Image url="@Count-tool-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="108.0" fitWidth="111.0" layoutX="181.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Tools-1-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="80.0" layoutX="407.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
+         <image>
+            <Image url="@Semicircleruler-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="83.0" fitWidth="89.0" layoutX="105.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pin.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="83.0" fitWidth="66.0" layoutX="307.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Podium-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="89.0" fitWidth="92.0" layoutX="249.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" rotate="18.4">
+         <image>
+            <Image url="@Rulers-icon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="66.0" layoutX="392.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Triangle-ruler-icon.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

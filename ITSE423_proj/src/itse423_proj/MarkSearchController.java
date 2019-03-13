@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package itse423_proj;
-
+//Islam Omar Ghretlli
+//215185139
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -23,12 +24,19 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.print.PrinterJob;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -50,19 +58,48 @@ public class MarkSearchController implements Initializable {
     @FXML
     private Label teacherNameField;
     @FXML
-    private AnchorPane root;
+    private BorderPane root;
     @FXML
-    private Pane overlay;
+    private VBox overlay;
+    @FXML
+    private HBox outerLay;
     
-    private static String searchSubById, searchSubByTeach;
+    private static String searchSubById, searchSubByTeach, teacherName;
     private ArrayList<String> myList = new ArrayList<>();
     PieChart chart=new PieChart();
+        private Alert alert=new Alert(Alert.AlertType.ERROR);
+    private String mHead, mCont;
+    
+    private void showAlert(int i){
+        String url;
+        alert.setHeaderText(mHead);
+        alert.setContentText(mCont);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                       getClass().getResource("alertStyles.css").toExternalForm());
+        if(i==1){
+            alert.setTitle("ERROR");
+            dialogPane.getStyleClass().add("error");
+            url="cross.png";
+        }
+        else{
+            alert.setTitle("SUCCESS");
+            dialogPane.getStyleClass().add("success");
+            url="check.png";
+        }
+        ImageView img=new ImageView(new Image(this.getClass().getResourceAsStream(url)));
+        img.setFitHeight(50);
+        img.setFitWidth(50);
+        dialogPane.setGraphic(img);
+        alert.showAndWait();
+    }
 
     @FXML
-    void initialize(String a, String b) throws IOException{
+    void initialize(String a, String b, String c) throws IOException{
         //initilize with search values
         this.searchSubById=a;
         this.searchSubByTeach=b;
+        this.teacherName=c;
     }
 
     private void setUp(){
@@ -160,7 +197,10 @@ public class MarkSearchController implements Initializable {
             }
             else{
                 //display error message in place of usual children
-                root.getChildren().clear();//.remove(root.lookup("#notFound"));
+                mHead="Something went wrong";
+                mCont="No data found";
+                showAlert(1);
+                root.getChildren().clear();
                 String m="Oops something went wrong, can't find subject with ";
                 if(searchSubById==null){
                     m+="Prof. name: "+searchSubByTeach;
@@ -169,14 +209,15 @@ public class MarkSearchController implements Initializable {
                     m+="Subject ID: "+searchSubById;
                 }
                 Label l=new Label(m);
-                l.setId("notFound");
-                l.setAlignment(Pos.CENTER);
-                l.setTranslateY(90);
-                l.setTranslateX(20);
-                l.setStyle("-fx-font-size:15px;");
-                searchSubById=null;
-                searchSubByTeach=null;
-                root.getChildren().add(l);
+                l.getStyleClass().addAll("utilityLabel", "errorPane");
+                VBox h=new VBox(l);
+                h.alignmentProperty().set(Pos.CENTER);
+                h.fillWidthProperty().set(true);
+                h.getStyleClass().addAll("errorBox");
+                VBox.setVgrow(h, Priority.ALWAYS);
+                searchSubById="";
+                searchSubByTeach="";
+                root.setCenter(h);
                 
             }
             dbc.disconnect();
@@ -188,34 +229,33 @@ public class MarkSearchController implements Initializable {
     //dynamically create chart screen with data and buttnos
     private void getChart(){
         Button btn= new Button("Save");
-        btn.setLayoutX(250); 
-        btn.setLayoutY(428.0);
         btn.setOnAction(e-> saveInfo());
-        btn.setStyle("-fx-border-radius: 5; -fx-background-radius: 5; -fx-font-family:'Times New Roman'; -fx-font-size:15px;");
+        btn.getStyleClass().add("utilityButton");
         Button btn2= new Button("Back");
-        btn2.setLayoutX(25); 
-        btn2.setLayoutY(25);
         btn2.setOnAction(e-> back());
-        btn2.setStyle("-fx-border-radius: 5; -fx-background-radius: 5; -fx-font-family:'Times New Roman'; -fx-font-size:15px;");
-        overlay.getChildren().addAll(chart,btn,btn2);
-        overlay.setManaged(true);
-        overlay.setVisible(true);
+        btn2.getStyleClass().add("utilityButton");
+        
+        overlay.getChildren().addAll(chart,btn);
+        outerLay.getChildren().add(0,btn2);
+        outerLay.setVisible(true);
     }
     //output chart screen to PDF or Printer
     private void saveInfo(){
         PrinterJob job = PrinterJob.createPrinterJob();
-        System.out.println("Doing");
+        //System.out.println("Doing");
         if(job != null){
             job.showPrintDialog(root.getScene().getWindow()); 
-            job.printPage(overlay);
+            Pane frame=new Pane(chart);
+            job.printPage(frame);
             job.endJob();
+            overlay.getChildren().add(0,chart);
         }
     }
     //hide and disable chart screen
     private void back(){
         overlay.getChildren().removeAll(overlay.getChildren());
-        overlay.setVisible(false);
-        overlay.setManaged(false);
+        outerLay.getChildren().removeAll(outerLay.lookup(".button"));
+        outerLay.setVisible(false);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

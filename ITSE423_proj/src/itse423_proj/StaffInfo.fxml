@@ -6,72 +6,117 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="staffInfoAnch" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="497.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.StaffInfoController">
-   <children>
-      <TabPane fx:id="staffTab" prefHeight="480.0" prefWidth="497.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Add Staff">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+<TabPane fx:id="staffTab" prefHeight="480.0" prefWidth="497.0" side="LEFT" stylesheets="@generalStyle.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="itse423_proj.StaffInfoController">
+  <tabs>
+    <Tab style="-fx-background-color: #ffccff; -fx-background-radius: 10px 0 0 0;" styleClass="utilityLabel" text="Add Staff">
+      <content>
+            <GridPane layoutX="32.0" layoutY="34.0" styleClass="utilityBackground">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label layoutX="32.0" layoutY="208.0" styleClass="utilityLabel" text="Confirm Password" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="32.0" layoutY="108.0" styleClass="utilityLabel" text="Position:" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="32.0" layoutY="38.0" styleClass="utilityLabel" text="New User Name:">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <PasswordField fx:id="confirmPass" layoutX="160.0" layoutY="204.0" styleClass="utilityField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </PasswordField>
+                  <HBox alignment="TOP_RIGHT" spacing="40.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <Label layoutX="32.0" layoutY="38.0" text="New User Name:" />
-                        <Label layoutX="32.0" layoutY="108.0" text="Position:" />
-                        <Label layoutX="32.0" layoutY="177.0" text="Password" />
-                        <Label layoutX="32.0" layoutY="208.0" text="Confirm Password" />
-                        <Button fx:id="addButton" layoutX="228.0" layoutY="264.0" mnemonicParsing="false" onAction="#addUser" text="Add" />
-                        <Button fx:id="cancelButton" layoutX="307.0" layoutY="264.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-                        <PasswordField fx:id="newPass" layoutX="160.0" layoutY="173.0" />
-                        <PasswordField fx:id="confirmPass" layoutX="160.0" layoutY="204.0" />
-                        <TextField fx:id="newName" layoutX="154.0" layoutY="34.0" />
-                        <ChoiceBox fx:id="positionChoice" layoutX="159.0" layoutY="104.0" prefWidth="150.0">
-                            <items>
-                                <FXCollections fx:factory="observableArrayList">
-                                    <String fx:value="Admin" />
-                                    <String fx:value="Teacher" />
-                                    <String fx:value="Employee" />
-                                </FXCollections>
-                            </items>
-                        </ChoiceBox>
+                        <Button fx:id="addButton" layoutX="228.0" layoutY="264.0" mnemonicParsing="false" onAction="#addUser" styleClass="utilityButton" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Button fx:id="cancelButton" layoutX="307.0" layoutY="264.0" mnemonicParsing="false" onAction="#cancel" styleClass="utilityButton" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                      </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab fx:id="removeStaff" text="Remove Staff">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </HBox>
+                  <ChoiceBox fx:id="positionChoice" layoutX="159.0" layoutY="104.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                      <items>
+                          <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Admin" />
+                              <String fx:value="Teacher" />
+                              <String fx:value="Employee" />
+                          </FXCollections>
+                      </items>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </ChoiceBox>
+                  <Label layoutX="32.0" layoutY="177.0" styleClass="utilityLabel" text="Password" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <PasswordField fx:id="newPass" layoutX="160.0" layoutY="173.0" styleClass="utilityField" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </PasswordField>
+                  <TextField fx:id="newName" layoutX="154.0" layoutY="34.0" styleClass="utilityField" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </TextField>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </GridPane>
+      </content>
+    </Tab>
+    <Tab fx:id="removeStaff" style="-fx-background-color: #ffccff; -fx-background-radius: 10px 10px 0 0;" styleClass="utilityLabel" text="Remove Staff">
+      <content>
+            <VBox layoutX="1.0" layoutY="1.0" prefHeight="480.0" prefWidth="468.0" spacing="10.0" styleClass="utilityBackground">
+               <children>
+                  <TextField fx:id="searchName" onKeyReleased="#typeName" styleClass="utilityField" />
+                  <HBox prefHeight="29.0" prefWidth="468.0" spacing="10.0">
                      <children>
-                        <VBox layoutX="1.0" layoutY="1.0" prefHeight="480.0" prefWidth="468.0" spacing="10.0">
-                           <children>
-                              <TextField fx:id="searchName" onKeyReleased="#typeName" />
-                              <HBox prefHeight="29.0" prefWidth="468.0" spacing="10.0">
-                                 <children>
-                                    <Label text="Are you sure you would like to remove " />
-                                    <Label fx:id="removeNameField" text="&quot;Type emp name in field above&quot;" textFill="#ff6a00" />
-                                 </children>
-                              </HBox>
-                              <HBox spacing="20.0">
-                                 <children>
-                                    <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#yesRemove" text="Yes" />
-                                    <Button fx:id="cancelRemove" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-                                 </children>
-                              </HBox>
-                              <VBox fx:id="hideBox" spacing="15.0" visible="false">
-                                 <children>
-                                    <Label text="Please confirm password" />
-                                    <PasswordField fx:id="confirmName" />
-                                    <Button fx:id="goButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#removeUser" text="Go" />
-                                 </children>
-                              </VBox>
-                           </children>
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                        </VBox>
+                        <Label styleClass="utilityLabel" text="Are you sure you would like to remove " />
+                        <Label fx:id="removeNameField" styleClass="utilityLabel" text="&quot;Type emp name in field above&quot;" textFill="#ff6a00" />
                      </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </children>
-</AnchorPane>
+                  </HBox>
+                  <HBox spacing="20.0">
+                     <children>
+                        <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#yesRemove" styleClass="utilityButton" text="Yes" />
+                        <Button fx:id="cancelRemove" mnemonicParsing="false" onAction="#cancel" styleClass="utilityButton" text="Cancel" />
+                     </children>
+                  </HBox>
+                  <VBox fx:id="hideBox" spacing="15.0" visible="false">
+                     <children>
+                        <Label styleClass="utilityLabel" text="Please confirm password" />
+                        <PasswordField fx:id="confirmName" styleClass="utilityField" />
+                        <Button fx:id="goButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#removeUser" styleClass="utilityButton" text="Go" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package itse423_proj;
-
+//Islam Omar Ghretlli
+//215185139
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,8 +16,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 /**
@@ -36,7 +40,32 @@ public class StaffInfoController implements Initializable {
     @FXML
     private VBox hideBox;
     
-    private Alert alert= new Alert(Alert.AlertType.ERROR);
+    private Alert alert=new Alert(Alert.AlertType.ERROR);
+    private String mHead, mCont;
+    
+    private void showAlert(int i){
+        String url;
+        alert.setHeaderText(mHead);
+        alert.setContentText(mCont);
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(
+                       getClass().getResource("alertStyles.css").toExternalForm());
+        if(i==1){
+            alert.setTitle("ERROR");
+            dialogPane.getStyleClass().add("error");
+            url="cross.png";
+        }
+        else{
+            alert.setTitle("SUCCESS");
+            dialogPane.getStyleClass().add("success");
+            url="check.png";
+        }
+        ImageView img=new ImageView(new Image(this.getClass().getResourceAsStream(url)));
+        img.setFitHeight(50);
+        img.setFitWidth(50);
+        dialogPane.setGraphic(img);
+        alert.showAndWait();
+    }
 
     @FXML
     private void addUser () throws SQLException{
@@ -45,9 +74,9 @@ public class StaffInfoController implements Initializable {
         alert.setTitle("ADD FAILED");
         //check if add field is empty
         if (newName.getText().equals("")|| newPass.getText().equals("") || confirmPass.getText().equals("")||positionChoice.getValue()==null) {
-            alert.setHeaderText ("Something went wrong while adding new user");
-            alert.setContentText("All fields are required");
-            alert.showAndWait();
+            mHead="Something went wrong while adding new user";
+            mCont="All fields are required";
+            showAlert(1);
         }
         //check if password is correct
         else if (newPass.getText().equals(confirmPass.getText())){
@@ -58,25 +87,24 @@ public class StaffInfoController implements Initializable {
             ps.setString(1, newName.getText());
             ps.setString(2, newPass.getText());
             ps.setString(3, positionChoice.getValue().toString());
-            if(!ps.execute()){
-                alert.setHeaderText ("Something went wrong while adding new user");
-                alert.setContentText("Check information and try again");
-                alert.showAndWait();
+            if(ps.executeUpdate()<1){
+                mHead="Something went wrong while adding new user";
+                mCont="All fields are required";
+                showAlert(1);
             }
             else{
-                alert.alertTypeProperty().set(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("SUCCESS");
-                alert.setHeaderText("New user added successfully");
-                alert.setContentText("Login with new credentials to see changes");
-                alert.showAndWait();
+                mHead="New user added successfully";
+                mCont="Login with new credentials to see changes";
+                showAlert(2);
+
             }
             dbc.disconnect();
         }
         else{
             confirmPass.setStyle("-fx-border-color:red;");
-            alert.setHeaderText ("Something went wrong while adding new user");
-            alert.setContentText("Password mismatch");
-            alert.showAndWait();
+            mHead="Something went wrong while adding new user";
+            mCont="Password mismatch";
+            showAlert(1);
             confirmPass.setStyle("-fx-border-color:none;");
         }
     }
@@ -102,28 +130,24 @@ public class StaffInfoController implements Initializable {
         AdminPageController apc=new AdminPageController();
         String userPass=apc.userPassword;
         if (!password.equals(userPass)){    
-            alert.setTitle("REMOVE FAILED");
-            alert.setHeaderText ("Something went wrong when trying to remove user");
-            alert.setContentText("Check your password and/or emp name and try again");
-            alert.showAndWait();
+            mHead="Something went wrong when trying to remove user";
+            mCont="Check your password and/or emp name and try again";
+            showAlert(1);
                 
             } 
         else {
             String sql="delete from user where fname=?";
             PreparedStatement ps=conn.prepareStatement(sql);
             ps.setString(1, name);
-            if (ps.execute()){
-                alert.setAlertType(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("SUCCESS");
-                alert.setHeaderText("User removed successfully");
-                alert.showAndWait();
+            if (ps.executeUpdate()>0){
+                mHead="User removed successfully";
+                showAlert(2);
                 dbc.disconnect();
             }
             else{
-                alert.setTitle("REMOVE FAILED");
-                alert.setHeaderText ("Something went wrong when trying to remove user");
-                alert.setContentText("Check your password and/or emp name and try again");
-                alert.showAndWait();
+               mHead="Something went wrong when trying to remove user";
+                mCont="Check your password and/or emp name and try again";
+                showAlert(1);
             }
         }
     }
@@ -131,9 +155,9 @@ public class StaffInfoController implements Initializable {
     //allow user to input confirmation password
     private void yesRemove (){
         if (searchName.getText().equals("")){
-            alert.setHeaderText ("Something went wrong while trying to remove user");
-            alert.setContentText("Please type name of user you wish to remove");
-            alert.showAndWait();
+            mHead="Something went wrong when trying to remove user";
+            mCont="Please type in employee name to remove";
+            showAlert(1);
             searchName.setStyle("-fx-border-color:red;");
         }
         else
